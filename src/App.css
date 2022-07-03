@@ -16,7 +16,7 @@ label input {
   margin-left: 5px;
 }
 
-.page-container {
+.page-wrapper {
   min-height: 100%;
   height: auto;
   display: flex;
@@ -38,9 +38,6 @@ label input {
 
 .header, .footer {
   justify-content: center;
-}
-
-.header {
   flex-basis: 80px;
 }
 
@@ -49,8 +46,8 @@ label input {
   flex-grow: 1;
 }
 
-.footer {
-  flex-basis: 80px;
+.login-page-content {
+  justify-content: center;
 }
 
 .input-field-component {

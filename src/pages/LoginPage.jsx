@@ -8,8 +8,8 @@ const submitLogin = () => {
 
 function LoginPage() {
   return (
-    <div className="page-container login-page">
-      <section className="page-content">
+    <div className="page-wrapper">
+      <section className="page-content  login-page-content">
         <h1>Login</h1>
         <InputField type="email" placeholder="Email" />
         <InputField type="password" placeholder="Password" />
