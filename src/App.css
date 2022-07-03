@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+button {
+  padding: 3px 5px;
+}
+
+label input {
+  margin-left: 5px;
+}
+
+.page-container {
+  min-height: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: space-between;
+}
+
+.footer, .header, .page-content{
+  width: 100%;
+}
+
+.header, .page-content, .footer {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header, .footer {
+  justify-content: center;
+}
+
+.header {
+  flex-basis: 80px;
+}
+
+.page-content {
+  margin: 5px 0;
+  flex-grow: 1;
+}
+
+.footer {
+  flex-basis: 80px;
+}
+
+.input-field-component {
+  display: flex;
+  align-items: center;
+}
+
