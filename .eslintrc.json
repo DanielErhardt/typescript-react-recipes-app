@@ -2,7 +2,8 @@
   "extends": ["airbnb"],
   "rules": {
     "no-unused-vars": "warn",
-    "func-names":"off"
+    "func-names":"off",
+    "max-len":"warn"
   },
   "env": {
     "browser": true,
