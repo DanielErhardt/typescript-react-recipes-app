@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 function Header({ title }) {
   return (
-    <section>
-      <h1>{title}</h1>
+    <section className="header">
+      <h1 className="header-title">{title}</h1>
     </section>
   );
 }
