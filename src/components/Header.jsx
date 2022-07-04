@@ -5,12 +5,25 @@ import InputElement from './inputs/InputElement';
 import { defaultIconConfig as ic } from '../helpers';
 
 function Header({ title }) {
+  const onLabelButtonClick = () => {
+
+  };
+
+  const labelButton = (
+    <button
+      type="button"
+      onClick={onLabelButtonClick}
+    >
+      <MagnifyingGlass weight={ic.weight} color={ic.color} size={ic.size} />
+    </button>
+  );
+
   return (
     <section className="header">
       <h1 className="header-title">{title}</h1>
       <div className="header-search-bar">
         <InputElement
-          label={<MagnifyingGlass weight={ic.weight} color={ic.color} size={ic.size} />}
+          label={labelButton}
           type="search"
         />
       </div>
