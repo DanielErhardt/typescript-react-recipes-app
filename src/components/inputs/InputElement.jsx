@@ -50,7 +50,7 @@ InputElement.defaultProps = {
 
 InputElement.propTypes = {
   id: PropTypes.string,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  label: PropTypes.oneOfType([PropTypes.string]),
   labelToRight: PropTypes.bool,
   type: PropTypes.oneOf(allowedTypes).isRequired,
   name: PropTypes.string,
