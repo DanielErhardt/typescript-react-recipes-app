@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Button(props) {
   const {
-    type, text, disabled, onClick,
+    type, content, disabled, onClick,
   } = props;
 
   return (
@@ -14,13 +14,13 @@ function Button(props) {
       disabled={disabled}
       onClick={onClick}
     >
-      {text}
+      {content}
     </button>
   );
 }
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   type: PropTypes.oneOf(['button', 'submit', 'reset']).isRequired,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
