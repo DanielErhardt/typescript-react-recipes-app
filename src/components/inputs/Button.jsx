@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 function Button(props) {
   const {
-    type, content, disabled, onClick,
+    className, type, content, disabled, onClick,
   } = props;
 
   return (
     <button
+      className={className}
     /* eslint-disable react/button-has-type */
-      type={type || 'button'}
+      type={type}
     /* eslint-enable react/button-has-type */
       disabled={disabled}
       onClick={onClick}
@@ -24,11 +25,13 @@ Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset']).isRequired,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 Button.defaultProps = {
   onClick: () => {},
   disabled: false,
+  className: '',
 };
 
 export default Button;
