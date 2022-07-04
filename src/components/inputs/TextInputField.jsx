@@ -1,9 +1,13 @@
 import React from 'react';
 import { At, Password } from 'phosphor-react';
 import PropTypes from 'prop-types';
-import createId from '../Helpers/HelperFunctions';
+import createId from '../../helpers';
 
-function InputField({ type, label, placeholder }) {
+function TextInputField(props) {
+  const {
+    name, onChange, type, label, placeholder,
+  } = props;
+
   const id = createId();
 
   const renderIcon = () => {
@@ -42,21 +46,31 @@ function InputField({ type, label, placeholder }) {
       {label === '' && renderIcon()}
       <label htmlFor={id}>
         {`${label} `}
-        <input id={id} type={type} placeholder={placeholder} />
+        <input
+          id={id}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          onChange={onChange}
+        />
       </label>
     </div>
   );
 }
 
-InputField.defaultProps = {
+TextInputField.defaultProps = {
   label: '',
   placeholder: '',
+  name: '',
+  onChange: () => {},
 };
 
-InputField.propTypes = {
+TextInputField.propTypes = {
+  name: PropTypes.string,
+  onChange: PropTypes.func,
   label: PropTypes.string,
   placeholder: PropTypes.string,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'password', 'email', 'search']).isRequired,
 };
 
-export default InputField;
+export default TextInputField;

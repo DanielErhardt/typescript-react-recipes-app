@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 
 function Button(props) {
   const {
-    type, text, onClick, disabled,
+    type, text, disabled, onClick,
   } = props;
+
   return (
     <button
     /* eslint-disable react/button-has-type */
       type={type || 'button'}
     /* eslint-enable react/button-has-type */
-      onClick={onClick}
       disabled={disabled}
+      onClick={onClick}
     >
       {text}
     </button>
