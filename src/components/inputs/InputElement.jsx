@@ -6,7 +6,7 @@ const allowedTypes = ['text', 'email', 'password', 'search', 'checkbox', 'radio'
 
 function InputElement(props) {
   const {
-    id, label, labelToRight, icon, type, name, divClassName, placeholder, onChange, defaultChecked,
+    id, label, labelToRight, type, name, divClassName, placeholder, onChange, defaultChecked,
   } = props;
 
   if (!allowedTypes.includes(type)) {
@@ -15,14 +15,11 @@ function InputElement(props) {
 
   const thisId = id || createId();
 
-  const renderLabel = () => {
-    const content = label || icon ? label || icon : '';
-    return (
-      <label htmlFor={thisId}>
-        {content}
-      </label>
-    );
-  };
+  const renderLabel = () => (
+    <label htmlFor={thisId}>
+      {label}
+    </label>
+  );
 
   return (
     <div className={`${divClassName}`}>
@@ -44,7 +41,6 @@ InputElement.defaultProps = {
   id: '',
   label: '',
   labelToRight: false,
-  icon: undefined,
   name: '',
   divClassName: '',
   placeholder: '',
@@ -54,9 +50,8 @@ InputElement.defaultProps = {
 
 InputElement.propTypes = {
   id: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   labelToRight: PropTypes.bool,
-  icon: PropTypes.element,
   type: PropTypes.oneOf(allowedTypes).isRequired,
   name: PropTypes.string,
   divClassName: PropTypes.string,
