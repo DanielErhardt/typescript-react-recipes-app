@@ -1,4 +1,4 @@
-const createId = (length = 10) => {
+export const createId = (length = 8) => {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
@@ -8,4 +8,8 @@ const createId = (length = 10) => {
   return result;
 };
 
-export default createId;
+export const defaultIconConfig = {
+  weight: 'bold',
+  size: '24px',
+  color: 'black',
+};
