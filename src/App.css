@@ -50,7 +50,7 @@ label input {
   justify-content: center;
 }
 
-.input-field-component {
+.input {
   display: flex;
   align-items: center;
 }
