@@ -15,7 +15,7 @@ function InputElement(props) {
 
   const thisId = id || createId();
 
-  const renderLabel = () => (
+  const label = (
     <label htmlFor={thisId}>
       {label}
     </label>
@@ -23,7 +23,7 @@ function InputElement(props) {
 
   return (
     <div className={`${divClassName}`}>
-      {!labelToRight && renderLabel()}
+      {!labelToRight && label}
       <input
         id={thisId}
         type={type}
@@ -32,7 +32,7 @@ function InputElement(props) {
         placeholder={placeholder}
         defaultChecked={defaultChecked}
       />
-      {labelToRight && renderLabel()}
+      {labelToRight && label}
     </div>
   );
 }
