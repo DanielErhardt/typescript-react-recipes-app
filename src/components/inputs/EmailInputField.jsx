@@ -8,7 +8,7 @@ function EmailInputField({ onChange }) {
   return (
     <LabeledInput
       divClassName="input email-input"
-      icon={<At weight={ic.weight} size={ic.size} color={ic.color} />}
+      label={<At weight={ic.weight} size={ic.size} color={ic.color} />}
       name="email"
       type="email"
       placeholder="Email"

@@ -8,7 +8,7 @@ function PasswordInputField({ onChange }) {
   return (
     <LabeledInput
       divClassName="input password-input"
-      icon={<Password weight={ic.weight} size={ic.size} color={ic.color} />}
+      label={<Password weight={ic.weight} size={ic.size} color={ic.color} />}
       name="password"
       type="password"
       placeholder="Password"
