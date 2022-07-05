@@ -6,9 +6,15 @@ import LabeledInput from './inputs/LabeledInput';
 
 function Header({ title }) {
   const [searchValue, setSearchValue] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('');
 
-  const onSearchChanged = ({ target: { value } }) => {
-    setSearchValue(value);
+  const searchFilters = ['Name', 'Ingredient', 'First Letter'];
+  const radioGroupName = 'header-search-filter';
+
+  const onSearchChanged = ({ target: { value } }) => setSearchValue(value);
+
+  const onFilterChanged = ({ target: { id } }) => {
+    setSelectedFilter(id);
   };
 
   const search = () => {
@@ -38,6 +44,19 @@ function Header({ title }) {
         label={searchButton}
         labelToRight
       />
+
+      <div className="header-search-filters">
+        {searchFilters.map((filter) => (
+          <LabeledInput
+            key={`${filter} filter`}
+            id={filter}
+            type="radio"
+            name={radioGroupName}
+            label={filter}
+            onChange={onFilterChanged}
+          />
+        ))}
+      </div>
     </section>
   );
 }
