@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
 import PropTypes from 'prop-types';
 import { defaultIconConfig as ic } from '../helpers';
 import LabeledInput from './inputs/LabeledInput';
 
 function Header({ title }) {
-  const onLabelButtonClick = () => {
+  const [searchValue, setSearchValue] = useState('');
+
+  const onSearchChanged = ({ target: { value } }) => {
+    setSearchValue(value);
+  };
+
+  const search = () => {
   };
 
   const searchButton = (
     <button
       className="search-button"
       type="button"
-      onClick={onLabelButtonClick}
+      onClick={search}
     >
       <MagnifyingGlass weight={ic.weight} color={ic.color} size={ic.size} />
     </button>
@@ -26,6 +32,8 @@ function Header({ title }) {
         className="search-input"
         type="search"
         name="search"
+        value={searchValue}
+        onChange={onSearchChanged}
         placeholder="Search Recipe"
         label={searchButton}
         labelToRight
