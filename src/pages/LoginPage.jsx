@@ -50,6 +50,7 @@ function LoginPage() {
           onChange={onInputChange}
         />
         <button
+          className="button-padded"
           type="button"
           disabled={!isLoginValid()}
           onClick={submitLogin}

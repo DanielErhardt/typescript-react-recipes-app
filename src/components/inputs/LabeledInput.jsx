@@ -23,9 +23,10 @@ function LabeledInput(props) {
   );
 
   return (
-    <div className={`${divClassName}`}>
+    <div className={`labeled-input ${divClassName}`}>
       {!labelToRight && labelElement}
       <input
+        style={{ margin: '0 3px' }}
         className={className}
         id={thisId}
         type={type}

@@ -17,6 +17,10 @@ html {
 }
 
 button {
+  padding: 0 2px;
+}
+
+.button-padded {
   padding: 3px 5px;
 }
 
@@ -46,7 +50,6 @@ label input {
 
 .header, .footer {
   justify-content: center;
-  flex-basis: 80px;
 }
 
 .page-content {
@@ -58,11 +61,14 @@ label input {
   justify-content: center;
 }
 
-.input {
+.labeled-input {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+}
+
+.header-title {
+  margin: 10px 0 0 3px;
 }
 
 .header-search-bar {
@@ -72,11 +78,18 @@ label input {
   height: 40px;
   width: 80%;
   border-radius: 2vh;
+  margin: 5px;
+}
+
+.header-search-filters {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 5px;
 }
 
 .search-button {
   cursor: pointer;
-  padding: 0;
   height: 30px;
   width: 30px;
   border-radius: 2vh;

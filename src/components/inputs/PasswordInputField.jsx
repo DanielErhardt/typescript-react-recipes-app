@@ -7,7 +7,7 @@ import { defaultIconConfig as ic } from '../../helpers';
 function PasswordInputField({ onChange }) {
   return (
     <LabeledInput
-      divClassName="input password-input"
+      divClassName="password-input"
       label={<Password weight={ic.weight} size={ic.size} color={ic.color} />}
       name="password"
       type="password"
