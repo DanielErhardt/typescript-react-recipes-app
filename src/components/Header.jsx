@@ -21,12 +21,11 @@ function Header({ title }) {
   return (
     <section className="header">
       <h1 className="header-title">{title}</h1>
-      <div className="header-search-bar">
-        <LabeledInput
-          label={labelButton}
-          type="search"
-        />
-      </div>
+      <LabeledInput
+        divClassName="header-search-bar"
+        label={labelButton}
+        type="search"
+      />
     </section>
   );
 }
