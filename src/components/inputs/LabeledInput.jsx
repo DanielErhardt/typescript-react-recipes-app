@@ -7,7 +7,7 @@ const allowedTypes = ['number', 'text', 'email', 'password', 'search', 'checkbox
 function LabeledInput(props) {
   const {
     id, label, labelToRight, type, name, value,
-    divClassName, placeholder, onChange, defaultChecked,
+    className, divClassName, placeholder, onChange, defaultChecked,
   } = props;
 
   if (!allowedTypes.includes(type)) {
@@ -26,6 +26,7 @@ function LabeledInput(props) {
     <div className={`${divClassName}`}>
       {!labelToRight && labelElement}
       <input
+        className={className}
         id={thisId}
         type={type}
         name={name}
@@ -46,6 +47,7 @@ LabeledInput.defaultProps = {
   name: '',
   value: '',
   divClassName: '',
+  className: '',
   placeholder: '',
   onChange: () => {},
   defaultChecked: false,
@@ -58,6 +60,7 @@ LabeledInput.propTypes = {
   type: PropTypes.oneOf(allowedTypes).isRequired,
   name: PropTypes.string,
   value: PropTypes.string,
+  className: PropTypes.string,
   divClassName: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
