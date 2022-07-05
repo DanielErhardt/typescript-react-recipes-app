@@ -4,12 +4,35 @@
   padding: 0;
 }
 
-html, body, #root {
+html {
+  display: flex;
   height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  height: 640px;
+  width: 360px;
 }
 
 button {
   padding: 3px 5px;
+}
+
+.icon-button {
+  cursor: pointer;
+  padding: 0;
+  height: 30px;
+  width: 30px;
+  border-radius: 2vh;
+}
+
+.search-input {
+  text-align: center;
+  height: 30px;
+  width: 75%;
+  border-radius:2vh;
 }
 
 label input {
@@ -30,7 +53,7 @@ label input {
 }
 
 .header, .page-content, .footer {
-  background-color: aqua;
+  background-color: rgb(255, 198, 198);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,6 +75,8 @@ label input {
 
 .input {
   display: flex;
+  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
