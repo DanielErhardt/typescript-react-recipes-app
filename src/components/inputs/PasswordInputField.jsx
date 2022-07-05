@@ -1,12 +1,12 @@
 import React from 'react';
 import { Password } from 'phosphor-react';
 import PropTypes from 'prop-types';
-import InputElement from './InputElement';
+import LabeledInput from './LabeledInput';
 import { defaultIconConfig as ic } from '../../helpers';
 
 function PasswordInputField({ onChange }) {
   return (
-    <InputElement
+    <LabeledInput
       divClassName="input password-input"
       icon={<Password weight={ic.weight} size={ic.size} color={ic.color} />}
       name="password"

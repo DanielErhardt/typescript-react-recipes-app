@@ -1,7 +1,7 @@
 import React from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
 import PropTypes from 'prop-types';
-import InputElement from './inputs/InputElement';
+import LabeledInput from './inputs/LabeledInput';
 import { defaultIconConfig as ic } from '../helpers';
 
 function Header({ title }) {
@@ -22,7 +22,7 @@ function Header({ title }) {
     <section className="header">
       <h1 className="header-title">{title}</h1>
       <div className="header-search-bar">
-        <InputElement
+        <LabeledInput
           label={labelButton}
           type="search"
         />
