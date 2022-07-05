@@ -4,7 +4,7 @@ import { createId } from '../../helpers';
 
 const allowedTypes = ['text', 'email', 'password', 'search', 'checkbox', 'radio'];
 
-function InputElement(props) {
+function LabeledInput(props) {
   const {
     id, label, labelToRight, type, name, divClassName, placeholder, onChange, defaultChecked,
   } = props;
@@ -37,7 +37,7 @@ function InputElement(props) {
   );
 }
 
-InputElement.defaultProps = {
+LabeledInput.defaultProps = {
   id: '',
   label: '',
   labelToRight: false,
@@ -48,9 +48,9 @@ InputElement.defaultProps = {
   defaultChecked: false,
 };
 
-InputElement.propTypes = {
+LabeledInput.propTypes = {
   id: PropTypes.string,
-  label: PropTypes.oneOfType([PropTypes.string]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   labelToRight: PropTypes.bool,
   type: PropTypes.oneOf(allowedTypes).isRequired,
   name: PropTypes.string,
@@ -60,4 +60,4 @@ InputElement.propTypes = {
   defaultChecked: PropTypes.bool,
 };
 
-export default InputElement;
+export default LabeledInput;
