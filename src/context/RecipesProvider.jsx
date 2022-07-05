@@ -8,7 +8,7 @@ function RecipesProvider({ children }) {
   const contextType = useMemo(() => ({
     recipes,
     setRecipes,
-  }), []);
+  }), [recipes]);
 
   return (
     <RecipesContext.Provider value={contextType}>
