@@ -11,7 +11,7 @@ function Header({ title }) {
     <section className="header">
       <h1 className="header-title">{title}</h1>
 
-      <div className="input">
+      <div className="input header-search-bar">
         <button
           className="icon-button"
           type="button"
