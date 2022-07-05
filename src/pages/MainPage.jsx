@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 function MainPage() {
   return (
     <div className="page-wrapper">
-      <Header />
+      <Header title="Recipes" />
       <div className="page-content main-page-content">
         Main Page
       </div>
