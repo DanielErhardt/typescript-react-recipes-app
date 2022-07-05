@@ -20,6 +20,15 @@ function Header({ title }) {
   const search = () => {
   };
 
+  const clearFilter = () => {
+    document.getElementsByName(radioGroupName)
+      .forEach((radio) => {
+        const ref = radio;
+        ref.checked = false;
+      });
+    setSelectedFilter('');
+  };
+
   const searchButton = (
     <button
       className="search-button"
@@ -56,6 +65,13 @@ function Header({ title }) {
             onChange={onFilterChanged}
           />
         ))}
+
+        <button
+          type="button"
+          onClick={clearFilter}
+        >
+          Clear
+        </button>
       </div>
     </section>
   );
