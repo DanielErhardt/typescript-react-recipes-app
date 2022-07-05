@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createId } from '../../helpers';
 
-const allowedTypes = ['text', 'email', 'password', 'search', 'checkbox', 'radio'];
+const allowedTypes = ['number', 'text', 'email', 'password', 'search', 'checkbox', 'radio'];
 
 function LabeledInput(props) {
   const {
-    id, label, labelToRight, type, name, divClassName, placeholder, onChange, defaultChecked,
+    id, label, labelToRight, type, name, value,
+    divClassName, placeholder, onChange, defaultChecked,
   } = props;
 
   if (!allowedTypes.includes(type)) {
@@ -28,6 +29,7 @@ function LabeledInput(props) {
         id={thisId}
         type={type}
         name={name}
+        value={value}
         onChange={onChange}
         placeholder={placeholder}
         defaultChecked={defaultChecked}
@@ -42,6 +44,7 @@ LabeledInput.defaultProps = {
   label: '',
   labelToRight: false,
   name: '',
+  value: '',
   divClassName: '',
   placeholder: '',
   onChange: () => {},
@@ -54,6 +57,7 @@ LabeledInput.propTypes = {
   labelToRight: PropTypes.bool,
   type: PropTypes.oneOf(allowedTypes).isRequired,
   name: PropTypes.string,
+  value: PropTypes.string,
   divClassName: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
