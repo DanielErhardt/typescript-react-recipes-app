@@ -10,7 +10,7 @@ function Header({ title }) {
 
   const searchButton = (
     <button
-      className="icon-button"
+      className="search-button"
       type="button"
       onClick={onLabelButtonClick}
     >
