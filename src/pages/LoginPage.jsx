@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useKeyPress } from '../hooks/KeyboardEventListeners';
 import EmailInputField from '../components/inputs/EmailInputField';
 import PasswordInputField from '../components/inputs/PasswordInputField';
-// import InputElement from '../components/inputs/base/InputElement';
-import Button from '../components/inputs/Button';
 import {
   saveMealsToken, saveCocktailsToken, saveUser,
 } from '../services/LocalStorageManager';
@@ -51,13 +49,13 @@ function LoginPage() {
         <PasswordInputField
           onChange={onInputChange}
         />
-        <Button
+        <button
           type="button"
-          text="Enter"
           disabled={!isLoginValid()}
           onClick={submitLogin}
-          onEnterUp={submitLogin}
-        />
+        >
+          Enter
+        </button>
       </section>
     </div>
   );
