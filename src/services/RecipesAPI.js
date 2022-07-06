@@ -1,7 +1,7 @@
 import { loadCocktailsToken, loadMealsToken } from './LocalStorageManager';
 
 export const MEALS_TYPE = 'meals';
-export const DRINKS_TYPE = 'drinks';
+export const COCKTAILS_TYPE = 'cocktails';
 
 const MEALS_BASE_API = `https://www.themealdb.com/api/json/v1/${loadMealsToken()}`;
 const COCKTAILS_BASE_API = `https://www.thecocktaildb.com/api/json/v1/${loadCocktailsToken()}`;
