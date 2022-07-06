@@ -20,25 +20,25 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<LoginPage />} />
-            <Route exact path="/foods" element={<MainPage />} />
-            <Route exact path="/drinks" element={<MainPage />} />
-            <Route path="/foods/:foodId" element={<RecipePage />} />
-            <Route path="/drinks/:drinkId" element={<RecipePage />} />
-            <Route path="/foods/:foodId/in-progress" element={<RecipePage />} />
-            <Route path="/drinks/:drinkId/in-progress" element={<RecipePage />} />
+            <Route exact path="/meals" element={<MainPage />} />
+            <Route exact path="/cocktails" element={<MainPage />} />
+            <Route path="/meals/:mealId" element={<RecipePage />} />
+            <Route path="/cocktails/:cocktailId" element={<RecipePage />} />
+            <Route path="/meals/:mealId/in-progress" element={<RecipePage />} />
+            <Route path="/cocktails/:cocktailId/in-progress" element={<RecipePage />} />
             <Route exact path="/explore" element={<ExplorePage />} />
-            <Route path="/explore/foods" element={<ExplorePage />} />
-            <Route path="/explore/drinks" element={<ExplorePage />} />
+            <Route path="/explore/meals" element={<ExplorePage />} />
+            <Route path="/explore/cocktails" element={<ExplorePage />} />
             <Route
-              path="/explore/foods/ingredients"
+              path="/explore/meals/ingredients"
               element={<ExploreByIngredients />}
             />
             <Route
-              path="/explore/drinks/ingredients"
+              path="/explore/cocktails/ingredients"
               element={<ExploreByIngredients />}
             />
             <Route
-              path="/explore/foods/nationalities"
+              path="/explore/meals/nationalities"
               component={<ExploreByNationalities />}
             />
             <Route path="/profile" element={<UserProfile />} />
