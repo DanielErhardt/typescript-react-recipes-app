@@ -29,13 +29,18 @@ function MainPage() {
     return () => {
       setRecipes([]);
     };
-  }, []);
+  }, [selectedCategory]);
+
+  const onCategoryChanged = ({ target: { value } }) => {
+    setRecipes([]);
+    setSelectedCategory(value);
+  };
 
   return (
     <div className="page-wrapper">
       <Header title="Recipes" />
       <div className="page-content main-page-content">
-        <DropDownMenu options={categories} label="Category: " />
+        <DropDownMenu options={categories} label="Category: " onChange={onCategoryChanged} />
         <RecipesList />
       </div>
       <Footer />
