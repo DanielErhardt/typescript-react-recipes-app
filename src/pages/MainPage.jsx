@@ -11,8 +11,8 @@ import { MEALS_TYPE, COCKTAILS_TYPE, fetchAllRecipes } from '../services/Recipes
 function MainPage() {
   const { recipes, setRecipes } = useContext(RecipesContext);
   const { mealsCategories, cocktailsCategories } = useContext(ListsContext);
-  const location = useLocation();
-  const currentType = location.pathname.includes('meal') ? MEALS_TYPE : COCKTAILS_TYPE;
+  const { pathname } = useLocation();
+  const currentType = pathname.includes('meal') ? MEALS_TYPE : COCKTAILS_TYPE;
   const categories = currentType === MEALS_TYPE ? mealsCategories : cocktailsCategories;
 
   useEffect(() => {
