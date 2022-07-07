@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import ListsContext from '../context/ListsContext';
@@ -9,6 +9,7 @@ import DropDownMenu from '../components/DropDownMenu';
 import { MEALS_TYPE, COCKTAILS_TYPE, fetchAllRecipes } from '../services/RecipesAPI';
 
 function MainPage() {
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const { recipes, setRecipes } = useContext(RecipesContext);
   const { mealsCategories, cocktailsCategories } = useContext(ListsContext);
   const { pathname } = useLocation();
