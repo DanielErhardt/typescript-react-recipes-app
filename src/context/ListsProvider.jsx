@@ -23,11 +23,19 @@ function ListsProvider({ children }) {
       const cIng = await fetchIngredients(COCKTAILS_TYPE);
       const mNat = await fetchAllMealsAreas();
 
-      setMealsCategories(mCat.meals.map((cat) => cat.strCategory));
-      setCocktailsCategories(cCat.drinks.map((cat) => cat.strCategory));
+      const mealsCatArray = mCat.meals.map((cat) => cat.strCategory);
+      mealsCatArray.unshift('All');
+      const cocktailsCatArray = cCat.drinks.map((cat) => cat.strCategory);
+      cocktailsCatArray.unshift('All');
+
+      const mealsNatArray = mNat.meals.map((nat) => nat.strArea);
+      mealsNatArray.unshift('None');
+
+      setMealsCategories(mealsCatArray);
+      setCocktailsCategories(cocktailsCatArray);
       setMealsIngredients(mIng.meals.map((ing) => ing.strIngredient));
       setCocktailsIngredients(cIng.drinks.map((ing) => ing.strIngredient1));
-      setMealsNationalities(mNat.meals.map((nat) => nat.strArea));
+      setMealsNationalities(mealsNatArray);
     };
     fetch();
   }, []);
