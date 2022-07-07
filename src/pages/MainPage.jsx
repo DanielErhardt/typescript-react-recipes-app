@@ -6,7 +6,9 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipesList from '../components/RecipesList';
 import DropDownMenu from '../components/DropDownMenu';
-import { MEALS_TYPE, COCKTAILS_TYPE, fetchAllRecipes } from '../services/RecipesAPI';
+import {
+  MEALS_TYPE, COCKTAILS_TYPE, fetchAllRecipes, fetchRecipesByCategory,
+} from '../services/RecipesAPI';
 
 function MainPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -18,9 +20,19 @@ function MainPage() {
 
   useEffect(() => {
     const fetch = async () => {
-      if (recipes.length === 0) {
-        const data = await fetchAllRecipes(currentType);
-        setRecipes(data[currentType]);
+      switch (selectedCategory) {
+        case 'All':
+          if (recipes.length === 0) {
+            const data = await fetchAllRecipes(currentType);
+            setRecipes(data[currentType]);
+          }
+          break;
+
+        default: {
+          const data = await fetchRecipesByCategory(currentType, selectedCategory);
+          setRecipes(data[currentType]);
+          break;
+        }
       }
     };
 
