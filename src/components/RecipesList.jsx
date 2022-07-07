@@ -1,8 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import RecipeCard from './RecipeCard';
+import RecipesContext from '../context/RecipesContext';
 
-function RecipesList({ recipes }) {
+function RecipesList() {
+  const { recipes } = useContext(RecipesContext);
   return (
     <div className="recipes-card-list">
       {recipes.map((recipe) => (
@@ -14,9 +15,5 @@ function RecipesList({ recipes }) {
     </div>
   );
 }
-
-RecipesList.propTypes = {
-  recipes: PropTypes.arrayOf(PropTypes.shape).isRequired,
-};
 
 export default RecipesList;
