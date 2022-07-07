@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createId } from '../helpers';
 
-function DropDownMenu({ label, options, labelToRight }) {
+function DropDownMenu({
+  label, options, onChange, labelToRight,
+}) {
   const id = createId();
 
   const labelElement = (
@@ -14,12 +16,12 @@ function DropDownMenu({ label, options, labelToRight }) {
   return (
     <div className="drop-down-menu">
       {!labelToRight && labelElement}
-      <select>
+      <select onChange={onChange}>
         {options.map((option) => (
           <option key={`option-${option}`}>{option}</option>
         ))}
       </select>
-      {!labelToRight && labelElement}
+      {labelToRight && labelElement}
     </div>
   );
 }
@@ -31,6 +33,7 @@ DropDownMenu.defaultProps = {
 DropDownMenu.propTypes = {
   label: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired,
   labelToRight: PropTypes.bool,
 };
 
