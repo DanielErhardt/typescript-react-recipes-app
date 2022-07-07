@@ -17,11 +17,15 @@ function ListsProvider({ children }) {
 
   useEffect(() => {
     const fetch = async () => {
-      const mCat = await fetchCategories(MEALS_TYPE);
-      const cCat = await fetchCategories(COCKTAILS_TYPE);
-      const mIng = await fetchIngredients(MEALS_TYPE);
-      const cIng = await fetchIngredients(COCKTAILS_TYPE);
-      const mNat = await fetchAllMealsAreas();
+      const [mCat, cCat, mIng, cIng, mNat] = await Promise.all(
+        [
+          fetchCategories(MEALS_TYPE),
+          fetchCategories(COCKTAILS_TYPE),
+          fetchIngredients(MEALS_TYPE),
+          fetchIngredients(COCKTAILS_TYPE),
+          fetchAllMealsAreas(),
+        ],
+      );
 
       const mealsCatArray = mCat.meals.map((cat) => cat.strCategory);
       mealsCatArray.unshift('All');
