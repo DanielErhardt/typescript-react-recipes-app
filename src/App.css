@@ -101,3 +101,14 @@ label input {
   width: 80%;
   border-radius:2vh;
 }
+
+.drop-down-menu {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.drop-down-menu select {
+  margin: 0 5px 0 5px;
+}
