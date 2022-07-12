@@ -40,25 +40,23 @@ function LoginPage() {
   useKeyPress('NumpadEnter', () => isLoginValid() && submitLogin());
 
   return (
-    <div className="page-wrapper">
-      <main>
-        <h1>Login</h1>
-        <EmailInputField
-          onChange={onInputChange}
-        />
-        <PasswordInputField
-          onChange={onInputChange}
-        />
-        <button
-          className="button-padded"
-          type="button"
-          disabled={!isLoginValid()}
-          onClick={submitLogin}
-        >
-          Enter
-        </button>
-      </main>
-    </div>
+    <main>
+      <h1>Login</h1>
+      <EmailInputField
+        onChange={onInputChange}
+      />
+      <PasswordInputField
+        onChange={onInputChange}
+      />
+      <button
+        className="button-padded"
+        type="button"
+        disabled={!isLoginValid()}
+        onClick={submitLogin}
+      >
+        Enter
+      </button>
+    </main>
   );
 }
 

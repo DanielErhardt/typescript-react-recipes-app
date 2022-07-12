@@ -49,14 +49,14 @@ function MainPage() {
   };
 
   return (
-    <div className="page-wrapper">
+    <>
       <Header title="Recipes" />
       <main>
         <DropDownMenu options={categories} label="Category: " onChange={onCategoryChanged} />
         <RecipesList />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
 
