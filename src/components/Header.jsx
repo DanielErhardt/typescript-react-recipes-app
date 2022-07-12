@@ -40,7 +40,7 @@ function Header({ title }) {
   );
 
   return (
-    <section className="header">
+    <header>
       <h1 className="header-title">{title}</h1>
       <LabeledInput
         divClassName="input header-search-bar"
@@ -73,7 +73,7 @@ function Header({ title }) {
           Clear
         </button>
       </div>
-    </section>
+    </header>
   );
 }
 
