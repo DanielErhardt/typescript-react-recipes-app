@@ -51,10 +51,10 @@ function MainPage() {
   return (
     <div className="page-wrapper">
       <Header title="Recipes" />
-      <div className="page-content main-page-content">
+      <main>
         <DropDownMenu options={categories} label="Category: " onChange={onCategoryChanged} />
         <RecipesList />
-      </div>
+      </main>
       <Footer />
     </div>
   );

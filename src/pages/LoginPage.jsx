@@ -41,7 +41,7 @@ function LoginPage() {
 
   return (
     <div className="page-wrapper">
-      <section className="page-content login-page-content">
+      <main>
         <h1>Login</h1>
         <EmailInputField
           onChange={onInputChange}
@@ -57,7 +57,7 @@ function LoginPage() {
         >
           Enter
         </button>
-      </section>
+      </main>
     </div>
   );
 }
