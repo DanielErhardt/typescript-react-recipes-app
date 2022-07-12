@@ -34,6 +34,10 @@ main {
   flex: auto;
 }
 
+.login-page {
+  justify-content: center;
+}
+
 button {
   padding: 0 2px;
 }
@@ -96,19 +100,18 @@ button {
 
 .recipes-list {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 6px;
+  gap: 6px;
   flex-wrap: wrap;
-  width: 100%;
-
 }
 
 .recipe-card {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  background-color: rgba(255,255,255,0.5);  
-  width: 45%;
-  margin: 5px;
+  background-color: rgba(255,255,255,0.5); 
+  width: calc(50% - 3px);
   padding: 3px;
   border-radius: 15px;
 }

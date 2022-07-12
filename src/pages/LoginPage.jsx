@@ -40,7 +40,7 @@ function LoginPage() {
   useKeyPress('NumpadEnter', () => isLoginValid() && submitLogin());
 
   return (
-    <main>
+    <main className="login-page">
       <h1>Login</h1>
       <EmailInputField
         onChange={onInputChange}
