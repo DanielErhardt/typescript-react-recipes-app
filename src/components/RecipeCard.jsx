@@ -1,9 +1,8 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function RecipeCard({ recipe }) {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
   const id = recipe.idMeal || recipe.idDrink;
   const name = recipe.strMeal || recipe.strDrink;
@@ -11,15 +10,15 @@ function RecipeCard({ recipe }) {
   const category = recipe.strCategory;
 
   return (
-    <button
-      type="button"
+    <Link
       className="recipe-card"
-      onClick={() => navigate(`${pathname}/${id}`)}
+      to={`${pathname}/${id}`}
+      type="button"
     >
-      {thumb}
-      {category}
-      {name}
-    </button>
+      <h4>{name}</h4>
+      <img src={thumb} alt="recipe thumb" />
+      <p>{category}</p>
+    </Link>
   );
 }
 
