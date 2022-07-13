@@ -1,6 +1,4 @@
-import React, {
-  useState, useMemo, useEffect, useContext,
-} from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
@@ -47,10 +45,6 @@ function RecipesProvider({ children }) {
   const fetchRandom = async () => setRecipes(
     extract(await fetchRandomRecipe(recipeType)),
   );
-
-  useEffect(() => {
-    if (recipes.length === 0) fetchAll();
-  }, [recipes]);
 
   const contextValue = useMemo(() => ({
     fetchAll,
