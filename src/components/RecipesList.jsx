@@ -6,7 +6,7 @@ function RecipesList() {
   const { recipes } = useContext(RecipesContext);
   return (
     <div className="recipes-list">
-      {recipes.map((recipe) => (
+      {recipes && recipes.map((recipe) => (
         <RecipeCard
           key={recipe.idMeal || recipe.idDrink}
           recipe={recipe}
