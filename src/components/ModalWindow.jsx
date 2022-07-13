@@ -1,13 +1,21 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 function ModalWindow({ message, onClose }) {
+  return ReactDOM.createPortal(
+    <>
+      {message.length > 0 && (
       <div className="modal-background">
         <div className="modal-window">
-        <br />
+          <h4>{message}</h4>
+          <br />
           <button type="button" onClick={onClose}>OK</button>
+        </div>
       </div>
-    </div>
+      )}
+    </>,
+    document.getElementById('portal'),
   );
 }
 
