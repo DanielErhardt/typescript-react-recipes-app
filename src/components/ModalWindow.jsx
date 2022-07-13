@@ -1,20 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function ModalWindow() {
-  const closeWindow = () => {
-    const window = document.querySelector('.modal-window');
-    window.classList.add('closed');
-  };
-
-  return (
-    <div className="modal-window closed">
-      <div className="modal-box">
-        <h4>Message</h4>
+function ModalWindow({ message, onClose }) {
         <br />
-        <button type="button" onClick={closeWindow}>OK</button>
+          <button type="button" onClick={onClose}>OK</button>
       </div>
     </div>
   );
 }
+
+ModalWindow.propTypes = {
+  message: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default ModalWindow;
