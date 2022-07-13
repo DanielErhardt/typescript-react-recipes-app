@@ -26,6 +26,18 @@ function Header({ title }) {
   };
 
   const search = () => {
+    switch (selectedFilter) {
+      case INGREDIENT_FILTER:
+        fetchByIngredient(searchValue);
+        break;
+      case FIRST_LETTER_FILTER:
+        fetchByFirstLetter(searchValue);
+        break;
+      default:
+        if (selectedFilter === NAME_FILTER) fetchByName(searchValue);
+        else fetchAll();
+        break;
+    }
   };
 
   const clearFilter = () => {
