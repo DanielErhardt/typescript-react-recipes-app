@@ -13,3 +13,10 @@ export const defaultIconConfig = {
   size: '24px',
   color: 'black',
 };
+
+export const openModalWindow = (message) => {
+  const window = document.querySelector('.modal-window');
+  const messageElement = document.querySelector('.modal-box h4');
+  messageElement.innerText = message;
+  window.classList.remove('closed');
+};
