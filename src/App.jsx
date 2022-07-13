@@ -15,9 +15,9 @@ import './App.css';
 
 function App() {
   return (
-    <ListsProvider>
-      <RecipesProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <ListsProvider>
+        <RecipesProvider>
           <Routes>
             <Route exact path="/" element={<LoginPage />} />
             <Route exact path="/meals" element={<MainPage />} />
@@ -46,9 +46,9 @@ function App() {
             <Route path="/favorite-recipes" element={<UserRecipes />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </RecipesProvider>
-    </ListsProvider>
+        </RecipesProvider>
+      </ListsProvider>
+    </BrowserRouter>
   );
 }
 
