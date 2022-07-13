@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
 import PropTypes from 'prop-types';
 import { useKeyPress } from '../hooks/KeyboardEventListeners';
-import { defaultIconConfig as ic } from '../helpers';
+import { defaultIconConfig as ic, openModalWindow } from '../helpers';
 import RecipesContext from '../context/RecipesContext';
 import LabeledInput from './inputs/LabeledInput';
 
@@ -30,7 +30,9 @@ function Header({ title }) {
         fetchByIngredient(searchValue);
         break;
       case FIRST_LETTER_FILTER:
-        fetchByFirstLetter(searchValue);
+        if (searchValue.length !== 1) openModalWindow('A search with this filter must contain only one character.');
+        else if (!searchValue.match(/[a-z]/i)) openModalWindow('A search with this filter must be a letter.');
+        else fetchByFirstLetter(searchValue);
         break;
       default:
         if (searchValue) fetchByName(searchValue);
