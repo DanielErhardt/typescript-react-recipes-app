@@ -6,11 +6,10 @@ import { defaultIconConfig as ic } from '../helpers';
 import RecipesContext from '../context/RecipesContext';
 import LabeledInput from './inputs/LabeledInput';
 
-const NAME_FILTER = 'Name';
 const INGREDIENT_FILTER = 'Ingredient';
 const FIRST_LETTER_FILTER = 'First Letter';
 const HEADER_SEARCH_FILTER = 'header-search-filter';
-const SEARCH_FILTERS = [NAME_FILTER, INGREDIENT_FILTER, FIRST_LETTER_FILTER];
+const SEARCH_FILTERS = [INGREDIENT_FILTER, FIRST_LETTER_FILTER];
 
 function Header({ title }) {
   const {
@@ -34,7 +33,7 @@ function Header({ title }) {
         fetchByFirstLetter(searchValue);
         break;
       default:
-        if (selectedFilter === NAME_FILTER) fetchByName(searchValue);
+        if (searchValue) fetchByName(searchValue);
         else fetchAll();
         break;
     }
