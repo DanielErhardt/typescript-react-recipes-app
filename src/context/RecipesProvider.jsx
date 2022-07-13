@@ -61,8 +61,9 @@ function RecipesProvider({ children }) {
     fetchByCategory,
     fetchMealsByNationality,
     fetchRandom,
-    recipes,
     recipeType,
+    recipes,
+    resetRecipes: () => setRecipes([]),
   }), [recipes, pathname]);
 
   return (
