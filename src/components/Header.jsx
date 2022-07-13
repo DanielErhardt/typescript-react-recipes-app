@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
 import PropTypes from 'prop-types';
 import { useKeyPress } from '../hooks/KeyboardEventListeners';
 import { defaultIconConfig as ic } from '../helpers';
+import RecipesContext from '../context/RecipesContext';
 import LabeledInput from './inputs/LabeledInput';
 
 const NAME_FILTER = 'Name';
@@ -12,6 +13,9 @@ const HEADER_SEARCH_FILTER = 'header-search-filter';
 const SEARCH_FILTERS = [NAME_FILTER, INGREDIENT_FILTER, FIRST_LETTER_FILTER];
 
 function Header({ title }) {
+  const {
+    fetchAll, fetchByName, fetchByIngredient, fetchByFirstLetter,
+  } = useContext(RecipesContext);
   const [searchValue, setSearchValue] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('');
 
