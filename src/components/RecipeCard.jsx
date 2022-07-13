@@ -17,7 +17,7 @@ function RecipeCard({ recipe }) {
     >
       <h4>{name}</h4>
       <img src={thumb} alt="recipe thumb" />
-      <p>{category}</p>
+      {category && <p>{`${category}`}</p>}
     </Link>
   );
 }
