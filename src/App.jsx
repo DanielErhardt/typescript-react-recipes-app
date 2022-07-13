@@ -11,7 +11,6 @@ import ExploreByIngredients from './pages/ExploreByIngredients';
 import ExploreByNationalities from './pages/ExploreByNationalities';
 import UserRecipes from './pages/UserRecipes';
 import NotFound from './pages/NotFound';
-import ModalWindow from './components/ModalWindow';
 import './App.css';
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
     <BrowserRouter>
       <ListsProvider>
         <RecipesProvider>
-          <ModalWindow />
           <Routes>
             <Route exact path="/" element={<LoginPage />} />
             <Route exact path="/meals" element={<MainPage />} />

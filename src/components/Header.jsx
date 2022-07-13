@@ -2,9 +2,10 @@ import React, { useState, useContext } from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
 import PropTypes from 'prop-types';
 import { useKeyPress } from '../hooks/KeyboardEventListeners';
-import { defaultIconConfig as ic, openModalWindow } from '../helpers';
+import { defaultIconConfig as ic } from '../helpers';
 import RecipesContext from '../context/RecipesContext';
 import LabeledInput from './inputs/LabeledInput';
+import ModalWindow from './ModalWindow';
 
 const INGREDIENT_FILTER = 'Ingredient';
 const FIRST_LETTER_FILTER = 'First Letter';
@@ -17,6 +18,7 @@ function Header({ title }) {
   } = useContext(RecipesContext);
   const [searchValue, setSearchValue] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
 
   const onSearchChanged = ({ target: { value } }) => setSearchValue(value);
 
@@ -30,8 +32,8 @@ function Header({ title }) {
         fetchByIngredient(searchValue);
         break;
       case FIRST_LETTER_FILTER:
-        if (searchValue.length !== 1) openModalWindow('A search with this filter must contain only one character.');
-        else if (!searchValue.match(/[a-z]/i)) openModalWindow('A search with this filter must be a letter.');
+        if (searchValue.length !== 1) setModalMessage('A search with this filter must contain only one character.');
+        else if (!searchValue.match(/[a-z]/i)) setModalMessage('A search with this filter must be a letter.');
         else fetchByFirstLetter(searchValue);
         break;
       default:
@@ -65,6 +67,7 @@ function Header({ title }) {
 
   return (
     <header>
+      <ModalWindow message={modalMessage} onClose={() => setModalMessage('')} />
       <h1 className="header-title">{title}</h1>
       <LabeledInput
         divClassName="input header-search-bar"
