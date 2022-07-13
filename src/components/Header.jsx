@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
 import PropTypes from 'prop-types';
+import { useKeyPress } from '../hooks/KeyboardEventListeners';
 import { defaultIconConfig as ic } from '../helpers';
 import LabeledInput from './inputs/LabeledInput';
 
@@ -38,6 +39,9 @@ function Header({ title }) {
       <MagnifyingGlass weight={ic.weight} color={ic.color} size={ic.size} />
     </button>
   );
+
+  useKeyPress('Enter', () => search());
+  useKeyPress('NumpadEnter', () => search());
 
   return (
     <header>
