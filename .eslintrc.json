@@ -3,7 +3,8 @@
   "rules": {
     "no-unused-vars": "warn",
     "func-names":"off",
-    "max-len":"warn"
+    "max-len":"warn",
+    "react/jsx-no-useless-fragment":"off"
   },
   "env": {
     "browser": true,
