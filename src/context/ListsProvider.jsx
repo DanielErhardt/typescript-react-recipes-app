@@ -1,11 +1,11 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ListsContext from './ListsContext';
 
 import {
   MEALS_TYPE, COCKTAILS_TYPE,
-  fetchAllMealsAreas,
-  fetchCategories, fetchIngredients,
+  fetchAllMealsAreas, fetchCategories, fetchIngredients,
 } from '../services/RecipesAPI';
 
 function ListsProvider({ children }) {
@@ -14,6 +14,7 @@ function ListsProvider({ children }) {
   const [mealsIngredients, setMealsIngredients] = useState([]);
   const [cocktailsIngredients, setCocktailsIngredients] = useState([]);
   const [mealsNationalities, setMealsNationalities] = useState([]);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const fetch = async () => {
@@ -31,7 +32,6 @@ function ListsProvider({ children }) {
       mealsCatArray.unshift('All');
       const cocktailsCatArray = cCat.drinks.map((cat) => cat.strCategory);
       cocktailsCatArray.unshift('All');
-
       const mealsNatArray = mNat.meals.map((nat) => nat.strArea);
       mealsNatArray.unshift('None');
 
@@ -44,17 +44,18 @@ function ListsProvider({ children }) {
     fetch();
   }, []);
 
-  const contextType = useMemo(() => ({
-    mealsCategories,
-    cocktailsCategories,
-    mealsIngredients,
-    cocktailsIngredients,
-    mealsNationalities,
-  }), [mealsCategories, cocktailsCategories,
-    mealsIngredients, cocktailsIngredients, mealsNationalities]);
+  const contextValue = useMemo(() => ({
+    categories: pathname.includes('meals') ? mealsCategories : cocktailsCategories,
+    ingredients: pathname.includes('meals') ? mealsIngredients : cocktailsIngredients,
+    nationalities: mealsNationalities,
+  }), [
+    pathname,
+    cocktailsCategories, cocktailsIngredients,
+    mealsCategories, mealsIngredients, mealsNationalities,
+  ]);
 
   return (
-    <ListsContext.Provider value={contextType}>
+    <ListsContext.Provider value={contextValue}>
       {children}
     </ListsContext.Provider>
   );
