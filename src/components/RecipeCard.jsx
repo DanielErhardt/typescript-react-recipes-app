@@ -15,8 +15,8 @@ function RecipeCard({ recipe }) {
       to={`${pathname}/${id}`}
       type="button"
     >
-      <h4>{name}</h4>
       <img src={thumb} alt="recipe thumb" />
+      <h2>{name}</h2>
       {category && <p>{`${category}`}</p>}
     </Link>
   );
