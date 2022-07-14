@@ -16,9 +16,16 @@ function RecipesProvider({ children }) {
   const { pathname } = useLocation();
   const recipeType = pathname.includes('meals') ? MEALS_TYPE : COCKTAILS_TYPE;
 
-  const extract = (data) => (data ? data[recipeType] : []);
+  const extract = (data, type = '') => {
+    if (type) return data ? data[type] : [];
+    return data ? data[recipeType] : [];
+  };
 
-  const fetchAll = async () => setRecipes(extract(await fetchAllRecipes(recipeType)));
+  const fetchAll = async (invert = false) => {
+    const invertedType = recipeType === MEALS_TYPE ? COCKTAILS_TYPE : MEALS_TYPE;
+    if (invert) setRecipes(extract(await fetchAllRecipes(invertedType), invertedType));
+    else setRecipes(extract(await fetchAllRecipes(recipeType)));
+  };
   const fetchByName = async (name) => setRecipes(
     extract(await fetchRecipesByName(recipeType, name)),
   );
