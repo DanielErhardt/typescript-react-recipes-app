@@ -22,10 +22,10 @@ function App() {
             <Route exact path="/" element={<LoginPage />} />
             <Route exact path="/meals" element={<MainPage />} />
             <Route exact path="/cocktails" element={<MainPage />} />
-            <Route path="/meals/:mealId" element={<RecipePage />} />
-            <Route path="/cocktails/:cocktailId" element={<RecipePage />} />
-            <Route path="/meals/:mealId/in-progress" element={<RecipePage />} />
-            <Route path="/cocktails/:cocktailId/in-progress" element={<RecipePage />} />
+            <Route path="/meals/:recipeId" element={<RecipePage />} />
+            <Route path="/cocktails/:recipeId" element={<RecipePage />} />
+            <Route path="/meals/:recipeId/in-progress" element={<RecipePage />} />
+            <Route path="/cocktails/:recipeId/in-progress" element={<RecipePage />} />
             <Route exact path="/explore" element={<ExplorePage />} />
             <Route path="/explore/meals" element={<ExplorePage />} />
             <Route path="/explore/cocktails" element={<ExplorePage />} />
