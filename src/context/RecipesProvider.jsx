@@ -5,10 +5,9 @@ import RecipesContext from './RecipesContext';
 import ListsContext from './ListsContext';
 import {
   MEALS_TYPE, COCKTAILS_TYPE,
-  fetchAllRecipes, fetchRecipeById, fetchRecipesByName,
+  fetchAllRecipes, fetchRecipesByName,
   fetchRecipesByFirstLetter, fetchRecipesByIngredient,
-  fetchRecipesByCategory, fetchRandomRecipe,
-  fetchMealsByArea,
+  fetchRecipesByCategory, fetchMealsByArea,
 } from '../services/RecipesAPI';
 
 function RecipesProvider({ children }) {
@@ -20,7 +19,6 @@ function RecipesProvider({ children }) {
   const extract = (data) => (data ? data[recipeType] : []);
 
   const fetchAll = async () => setRecipes(extract(await fetchAllRecipes(recipeType)));
-  const fetchById = async (id) => setRecipes(extract(await fetchRecipeById(recipeType, id)));
   const fetchByName = async (name) => setRecipes(
     extract(await fetchRecipesByName(recipeType, name)),
   );
@@ -42,19 +40,14 @@ function RecipesProvider({ children }) {
       ? await fetchAll()
       : await fetchMealsByArea(nationality)),
   );
-  const fetchRandom = async () => setRecipes(
-    extract(await fetchRandomRecipe(recipeType)),
-  );
 
   const contextValue = useMemo(() => ({
     fetchAll,
-    fetchById,
     fetchByName,
     fetchByFirstLetter,
     fetchByIngredient,
     fetchByCategory,
     fetchMealsByNationality,
-    fetchRandom,
     recipeType,
     recipes,
     resetRecipes: () => setRecipes([]),
