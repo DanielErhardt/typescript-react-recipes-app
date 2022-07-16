@@ -83,25 +83,15 @@ function RecipePage() {
         </section>
       </>
       )}
-      {isInProgressPage ? (
-        <button
-          type="button"
-          onClick={finishRecipe()}
-          disabled={!finished}
-        >
-          Finish Recipe
-        </button>
-      ) : (
-        <>
-          {!isRecipeDone(recipe) && (
-            <button
-              type="button"
-              onClick={() => navigate(`${path}/in-progress`)}
-            >
-              { isRecipeInProgress(recipe) ? 'Continue Recipe' : 'Start Recipe' }
-            </button>
-          )}
-        </>
+      {(isInProgressPage || (!isInProgressPage && !isRecipeDone(recipe))) && (
+      <button
+        type="button"
+        onClick={isInProgressPage ? () => finishRecipe() : () => navigate(`${path}/in-progress`)}
+        disabled={isInProgressPage ? !finished : false}
+      >
+        { !isInProgressPage && (isRecipeInProgress(recipe) ? 'Continue Recipe' : 'Start Recipe') }
+        { isInProgressPage && 'Finish Recipe'}
+      </button>
       )}
     </main>
   );
