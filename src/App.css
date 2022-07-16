@@ -42,10 +42,6 @@ button {
   padding: 0 2px;
 }
 
-li input {
-  margin-right: 3px;
-}
-
 .button-padded {
   padding: 3px 5px;
 }
@@ -113,7 +109,7 @@ li input {
 .recipe-card {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   text-decoration: none;
   background-color: rgba(255,255,255,0.5); 
@@ -156,58 +152,4 @@ li input {
 
 .modal-window button {
   width: 50px;
-}
-
-.details-page {
-  padding: 5px;
-  gap: 10px
-}
-
-.details-page button {
-  font-size: 20px;
-  font-weight: 600;
-  border-radius: 10px;
-  min-height: 40px;
-  width: 100%;
-}
-
-.details-page-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.details-page-section .section-background {
-  background-color: rgba(255,255,255,0.5);
-  border-radius: 10px;
-  width: 100%;
-}
-.details-page-section .section-background.padded {
-  padding: 10px;
-}
-
-.details-page-section.details-header .section-background {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.details-page .details-image {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.details-page .details-name-bar {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.horizontal-scroll {
-  display: flex;
-  gap: 6px;
-  min-height: 220px;
-  overflow: scroll;
 }
