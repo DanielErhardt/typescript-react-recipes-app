@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function IngredientsList({ ingredients, measures }) {
+function IngredientsList({ recipe, onProgressChanged }) {
   const { pathname: path } = useLocation();
   const isInProgress = path.includes('progress');
 
@@ -42,8 +42,8 @@ function IngredientsList({ ingredients, measures }) {
 }
 
 IngredientsList.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
-  measures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  recipe: PropTypes.shape().isRequired,
+  onProgressChanged: PropTypes.func.isRequired,
 };
 
 export default IngredientsList;
