@@ -2,6 +2,7 @@ import React, {
   useContext, useEffect, useState, useMemo,
 } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 import RecipesContext from '../context/RecipesContext';
 import { fetchRecipeById } from '../services/RecipesAPI';
 import IngredientsList from '../components/IngredientsList';
@@ -69,6 +70,11 @@ function RecipePage() {
       <>
         <section className="details-page-section">
           <h3>Video</h3>
+          <ReactPlayer
+            url={recipe.strYoutube}
+            width="100%"
+            height="100%"
+          />
         </section>
         <section className="details-page-section">
           <h3>Recommended</h3>
