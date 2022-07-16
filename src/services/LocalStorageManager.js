@@ -3,147 +3,48 @@ const MEALS_TOKEN = 'mealsToken';
 const COCKTAILS_TOKEN = 'cocktailsToken';
 const DONE_RECIPES = 'doneRecipes';
 const FAVORITE_RECIPES = 'favoriteRecipes';
-const IN_PROGRESS_RECIPES = 'inProgressRecipes';
+const RECIPES_PROGRESS = 'recipesProgress';
 
-export const saveUser = (email) => {
-  localStorage.setItem(USER, JSON.stringify({ email }));
-};
+export const saveUser = (email) => localStorage.setItem(USER, email);
+export const loadUser = () => localStorage.getItem(USER) || '';
 
-export const loadUser = () => {
-  const storedUser = JSON.parse(localStorage.getItem(USER));
-  return storedUser || { email: '' };
-};
-
-export const saveMealsToken = (token) => {
-  localStorage.setItem(MEALS_TOKEN, token);
-};
-
+export const saveMealsToken = (token) => localStorage.setItem(MEALS_TOKEN, token);
 export const loadMealsToken = () => JSON.parse(localStorage.getItem(MEALS_TOKEN)) || 1;
 
-export const saveCocktailsToken = (token) => {
-  localStorage.setItem(COCKTAILS_TOKEN, token);
+export const saveCocktailsToken = (token) => localStorage.setItem(COCKTAILS_TOKEN, token);
+export const loadCocktailsToken = () => localStorage.getItem(COCKTAILS_TOKEN) || 1;
+
+const getId = (recipe) => (recipe.idMeal || recipe.idDrink);
+
+const loadRecipeArray = (key) => JSON.parse(localStorage.getItem(key)) || [];
+const saveRecipeInArray = (key, recipe) => {
+  const list = loadRecipeArray(key);
+  const newList = list.some((r) => getId(r) === getId(recipe)) ? list : [...list, recipe];
+  localStorage.setItem(key, JSON.stringify(newList));
 };
-
-export const loadCocktailsToken = () => JSON
-  .parse(localStorage.getItem(COCKTAILS_TOKEN)) || 1;
-
-export const loadFavoriteRecipes = () => JSON
-  .parse(localStorage.getItem(FAVORITE_RECIPES)) || [];
-
-export const saveFavoriteRecipe = (recipe) => {
-  const doneRecipes = loadFavoriteRecipes();
-  const recipeId = recipe.idMeal || recipe.idDrink;
-
-  if (doneRecipes !== null && doneRecipes.some((r) => r.id === recipeId)) return;
-
-  const formatedRecipe = {
-    id: recipe.idMeal || recipe.idDrink,
-    type: recipe.idMeal ? 'food' : 'drink',
-    nationality: recipe.strArea || '',
-    category: recipe.strCategory || '',
-    alcoholicOrNot: recipe.idDrink ? recipe.strAlcoholic : '',
-    name: recipe.strMeal || recipe.strDrink,
-    image: recipe.strMealThumb || recipe.strDrinkThumb,
-  };
-
-  if (doneRecipes === null) {
-    localStorage.setItem(FAVORITE_RECIPES, JSON.stringify([formatedRecipe]));
-  } else {
-    localStorage
-      .setItem(FAVORITE_RECIPES, JSON.stringify([...doneRecipes, formatedRecipe]));
-  }
+const removeRecipeFromArray = (key, recipe) => {
+  const list = loadRecipeArray(key);
+  const newList = list.filter((r) => getId(r) !== getId(recipe));
+  localStorage.setItem(key, JSON.stringify(newList));
 };
+const isRecipeInArray = (key, recipe) => loadRecipeArray(key)
+  .some((r) => getId(r) === getId(recipe));
 
-export const removeFavoriteRecipe = (recipeId) => {
-  const recipes = loadFavoriteRecipes();
-  const filteredRecipes = recipes.filter((r) => r.id !== recipeId);
-  localStorage.setItem(FAVORITE_RECIPES, JSON.stringify(filteredRecipes));
+export const loadFavoriteRecipes = () => loadRecipeArray(FAVORITE_RECIPES);
+export const saveFavoriteRecipe = (recipe) => saveRecipeInArray(FAVORITE_RECIPES, recipe);
+export const removeFavoriteRecipe = (recipe) => removeRecipeFromArray(FAVORITE_RECIPES, recipe);
+export const isRecipeFavorite = (recipe) => isRecipeInArray(FAVORITE_RECIPES, recipe);
+
+export const loadDoneRecipes = () => loadRecipeArray(DONE_RECIPES);
+export const saveDoneRecipe = (recipe) => saveRecipeInArray(DONE_RECIPES, recipe);
+export const isRecipeDone = (recipe) => isRecipeInArray(DONE_RECIPES, recipe);
+
+const loadRecipesInProgress = () => JSON.parse(localStorage.getItem(RECIPES_PROGRESS)) || {};
+export const loadRecipeProgress = (recipe) => loadRecipesInProgress()[getId(recipe)] || [];
+export const saveRecipeProgress = (recipe, usedIngredients) => {
+  const progress = { ...loadRecipesInProgress(), [getId(recipe)]: usedIngredients };
+  localStorage.setItem(RECIPES_PROGRESS, JSON.stringify(progress));
 };
-
-export const recipeIsFavorite = (recipeId) => {
-  const favoriteRecipes = loadFavoriteRecipes();
-  if (favoriteRecipes === null) return false;
-  return favoriteRecipes.some((r) => r.id === recipeId);
-};
-
-export const loadInProgressRecipes = () => {
-  const inProgressRecipes = JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES));
-  return inProgressRecipes || { cocktails: {}, meals: {} };
-};
-
-export const saveInProgressRecipe = (recipe, usedIngredients) => {
-  const type = recipe.idMeal ? 'meals' : 'cocktails';
-  const id = recipe.idMeal || recipe.idDrink;
-
-  const inProgressRecipes = {
-    ...loadInProgressRecipes(),
-    [type]: {
-      [id]: usedIngredients,
-    },
-  };
-
-  localStorage.setItem(IN_PROGRESS_RECIPES, JSON.stringify(inProgressRecipes));
-};
-
-export const recipeIsInProgress = (recipeId) => {
-  const recipes = loadInProgressRecipes();
-  let allKeys = [];
-  if (recipes.cocktails) allKeys = [...Object.keys(recipes.cocktails)];
-  if (recipes.meals) allKeys = [...allKeys, ...Object.keys(recipes.meals)];
-  const result = allKeys.includes(recipeId);
-  return result;
-};
-
-export const removeInProgressRecipe = (recipe) => {
-  const id = recipe.idMeal || recipe.idDrink;
-  if (!recipeIsInProgress(id)) return;
-  const recipes = loadInProgressRecipes();
-  const isFood = recipe.idMeal !== undefined;
-
-  if (isFood) {
-    delete recipes.meals[id];
-  } else delete recipes.cocktails[id];
-
-  localStorage.setItem(IN_PROGRESS_RECIPES, JSON.stringify(recipes));
-};
-
-const getEntries = (object) => (object ? Object.entries(object) : []);
-
-export const loadInProgressRecipeIngredients = (recipeId) => {
-  const { cocktails, meals } = loadInProgressRecipes();
-  const allEntries = [...getEntries(cocktails), ...getEntries(meals)];
-  const result = allEntries.find((entry) => entry[0] === recipeId);
-  return result ? result[1] : [];
-};
-
-export const loadDoneRecipes = () => JSON.parse(localStorage.getItem(DONE_RECIPES)) || [];
-
-export const saveDoneRecipe = (recipe) => {
-  const doneRecipes = loadDoneRecipes();
-  const recipeId = recipe.idMeal || recipe.idDrink;
-
-  removeInProgressRecipe(recipe);
-
-  if (doneRecipes.some((r) => r.id === recipeId)) return;
-
-  const date = new Date();
-  const formatedRecipe = {
-    id: recipe.idMeal || recipe.idDrink,
-    type: recipe.idMeal ? 'Food' : 'Drink',
-    nationality: recipe.strArea || '',
-    category: recipe.strCategory || '',
-    alcoholicOrNot: recipe.idDrink ? recipe.strAlcoholic : '',
-    name: recipe.strMeal || recipe.strDrink,
-    image: recipe.strMealThumb || recipe.strDrinkThumb,
-    doneDate: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
-    tags: recipe.strTags || '',
-  };
-
-  localStorage.setItem(DONE_RECIPES, JSON.stringify([...doneRecipes, formatedRecipe]));
-};
-
-export const recipeIsDone = (recipeId) => {
-  const doneRecipes = loadDoneRecipes();
-  if (doneRecipes.length === 0) return false;
-  return doneRecipes.some((r) => r.id === recipeId);
-};
+export const isRecipeInProgress = (recipe) => Object
+  .keys(loadRecipesInProgress()).includes(getId(recipe));
+// export const removeRecipeProgress = (recipe) => delete loadRecipesInProgress()[getId(recipe)];
