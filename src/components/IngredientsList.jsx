@@ -7,11 +7,27 @@ function IngredientsList({ ingredients, measures }) {
   const isInProgress = path.includes('progress');
 
   return (
-    <ul style={{ marginLeft: '15px' }}>
-      {isInProgress ? (
+    <ul style={{
+      marginLeft: isInProgressPage ? '0' : '15px',
+      listStyle: isInProgressPage ? 'none' : 'square',
+    }}
+    >
+      {isInProgressPage ? (
         ingredients.map((ing, index) => (
           <li key={`ing-${ing}`}>
+            <input
+              type="checkbox"
+              defaultChecked={checkedIngredients.includes(ing)}
+              id={`ing${index}`}
+              name={ing}
+              onChange={onCheckboxClicked}
+            />
+            <label
+              htmlFor={`ing${index}`}
+              style={{ textDecoration: checkedIngredients.includes(ing) ? 'line-through' : 'none' }}
+            >
             {`${ing}: ${measures[index]}`}
+            </label>
           </li>
         ))
       ) : (
