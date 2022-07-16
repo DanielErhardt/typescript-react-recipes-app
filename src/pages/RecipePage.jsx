@@ -29,6 +29,8 @@ function RecipePage() {
     fetchAll(true);
   }, []);
 
+  const onProgressChanged = (allChecked) => setFinished(allChecked);
+
   return (
     <main className="details-page">
       <section className="details-page-section details-header">
@@ -43,10 +45,7 @@ function RecipePage() {
       <section className="details-page-section">
         <h3>Ingredients</h3>
         <div className="section-background padded">
-          <IngredientsList
-            ingredients={recipe.ingredients || []}
-            measures={recipe.measures || []}
-          />
+          <IngredientsList recipe={recipe} onProgressChanged={onProgressChanged} />
         </div>
       </section>
       <section className="details-page-section">
