@@ -20,8 +20,10 @@ function RecipePage() {
   const [recipe, setRecipe] = useState({});
   const { recipeType, recipes, fetchAll } = useContext(RecipesContext);
   const { recipeId } = useParams();
-  const [recipe, setRecipe] = useState({ id: recipeId });
+  const { pathname: path } = useLocation();
+  const navigate = useNavigate();
   const recommended = useMemo(() => (recipes ? recipes.slice(0, 6) : []), [recipes]);
+  const isInProgressPage = path.includes('progress');
 
   useEffect(() => {
     const fetch = async () => {
