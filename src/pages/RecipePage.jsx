@@ -24,6 +24,7 @@ function RecipePage() {
   const navigate = useNavigate();
   const recommended = useMemo(() => (recipes ? recipes.slice(0, 6) : []), [recipes]);
   const isInProgressPage = path.includes('progress');
+  // const recipeTags = extractTags(recipe.strTags);
 
   useEffect(() => {
     const fetch = async () => {
@@ -35,6 +36,11 @@ function RecipePage() {
   }, []);
 
   const onProgressChanged = (allChecked) => setFinished(allChecked);
+
+  const finishRecipe = () => {
+    saveDoneRecipe(recipe);
+    navigate('/done-recipes');
+  };
 
   return (
     <main className="details-page">
@@ -61,28 +67,30 @@ function RecipePage() {
       </section>
       {!isInProgressPage && (
       <>
-      <section className="details-page-section">
-        <h3>Video</h3>
-      </section>
-      <section className="details-page-section">
-        <h3>Recommended</h3>
-        <div className="horizontal-scroll">
-          {recommended.map((r) => (
-            <RecipeCard
-              key={r.idMeal || r.idDrink}
-              recipe={r}
-            />
-          ))}
-        </div>
-      </section>
+        <section className="details-page-section">
+          <h3>Video</h3>
+        </section>
+        <section className="details-page-section">
+          <h3>Recommended</h3>
+          <div className="horizontal-scroll">
+            {recommended.map((r) => (
+              <RecipeCard
+                key={r.idMeal || r.idDrink}
+                recipe={r}
+              />
+            ))}
+          </div>
+        </section>
       </>
       )}
       {isInProgressPage ? (
-      <button
-        type="button"
-      >
+        <button
+          type="button"
+          onClick={finishRecipe()}
+          disabled={!finished}
+        >
           Finish Recipe
-      </button>
+        </button>
       ) : (
         <>
           {!isRecipeDone(recipe) && (
