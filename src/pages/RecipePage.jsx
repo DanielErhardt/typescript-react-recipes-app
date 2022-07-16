@@ -16,6 +16,8 @@ import { isRecipeDone, isRecipeInProgress, saveDoneRecipe } from '../services/Lo
 // };
 
 function RecipePage() {
+  const [finished, setFinished] = useState(false);
+  const [recipe, setRecipe] = useState({});
   const { recipeType, recipes, fetchAll } = useContext(RecipesContext);
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState({ id: recipeId });
