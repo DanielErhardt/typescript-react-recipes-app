@@ -1,7 +1,7 @@
 import React, {
   useContext, useEffect, useState, useMemo,
 } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import { fetchRecipeById } from '../services/RecipesAPI';
 import IngredientsList from '../components/IngredientsList';
