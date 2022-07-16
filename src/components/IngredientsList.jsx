@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { loadRecipeProgress, saveRecipeProgress } from '../services/LocalStorageManager';
@@ -23,6 +23,15 @@ function IngredientsList({ recipe, onProgressChanged }) {
     );
   }, [recipe]);
 
+  const onCheckboxClicked = ({ target: { checked, name } }) => {
+    const checkedList = checked
+      ? [...checkedIngredients, name]
+      : checkedIngredients.filter((ing) => ing !== name);
+    const allChecked = ingredients.every((ing) => checkedList.includes(ing));
+    onProgressChanged(allChecked);
+    saveRecipeProgress(recipe, checkedList);
+    setCheckedIngredients(checkedList);
+  };
 
   return (
     <ul style={{
@@ -44,7 +53,7 @@ function IngredientsList({ recipe, onProgressChanged }) {
               htmlFor={`ing${index}`}
               style={{ textDecoration: checkedIngredients.includes(ing) ? 'line-through' : 'none' }}
             >
-            {`${ing}: ${measures[index]}`}
+              {`${ing}: ${measures[index]}`}
             </label>
           </li>
         ))
