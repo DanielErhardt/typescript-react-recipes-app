@@ -7,17 +7,12 @@ import { fetchRecipeById } from '../services/RecipesAPI';
 import IngredientsList from '../components/IngredientsList';
 import RecipeCard from '../components/RecipeCard';
 
-const extractTags = (tags) => {
-  // Regex taken from https://stackoverflow.com/questions/650022/how-do-i-split-a-string-with-multiple-separators-in-javascript
-  const separator = /(?:,| )+/;
-  if (tags) return tags.split(separator);
-  return [];
-};
-
-const extractList = (recipe, key) => Object.entries(recipe)
-  .filter((e) => e[0].includes(key))
-  .map((m) => m[1])
-  .filter((m) => m && m !== ' ');
+// const extractTags = (tags) => {
+//   // Regex taken from https://stackoverflow.com/questions/650022/how-do-i-split-a-string-with-multiple-separators-in-javascript
+//   const separator = /(?:,| )+/;
+//   if (tags) return tags.split(separator);
+//   return [];
+// };
 
 function RecipePage() {
   const { recipeType, recipes, fetchAll } = useContext(RecipesContext);
@@ -28,21 +23,7 @@ function RecipePage() {
   useEffect(() => {
     const fetch = async () => {
       const data = await fetchRecipeById(recipeType, recipeId);
-      const r = data[recipeType][0];
-      setRecipe({
-        ...recipe,
-        name: r.strMeal || r.strDrink,
-        thumb: r.strMealThumb || r.strDrinkThumb,
-        category: r.strCategory,
-        nationality: r.strArea,
-        alcoholic: r.strAlcoholic,
-        instuctions: r.strInstructions,
-        source: r.strSource,
-        video: r.strYoutube,
-        tags: extractTags(r.strTags),
-        ingredients: extractList(r, 'Ingredient'),
-        measures: extractList(r, 'Measure'),
-      });
+      setRecipe(data[recipeType][0]);
     };
     fetch();
     fetchAll(true);
@@ -52,10 +33,10 @@ function RecipePage() {
     <main className="details-page">
       <section className="details-page-section details-header">
         <div className="section-background">
-          <img className="details-image" src={recipe.thumb} alt="Recipe Thumb" />
+          <img className="details-image" src={recipe.strMealThumb || recipe.strDrinkThumb} alt="Recipe Thumb" />
           <div className="details-name-bar">
-            <h1>{recipe.name}</h1>
-            {recipe.alcoholic ? <p>{`${recipe.category} (${recipe.alcoholic})`}</p> : <p>{recipe.category}</p>}
+            <h1>{recipe.strMeal || recipe.strDrink}</h1>
+            {recipe.strAlcoholic ? <p>{`${recipe.strCategory} (${recipe.strAlcoholic})`}</p> : <p>{recipe.strCategory}</p>}
           </div>
         </div>
       </section>
@@ -71,7 +52,7 @@ function RecipePage() {
       <section className="details-page-section">
         <h3>Instructions</h3>
         <div className="section-background padded">
-          <p>{recipe.instuctions}</p>
+          <p>{recipe.strInstructions}</p>
         </div>
       </section>
       <section className="details-page-section">
