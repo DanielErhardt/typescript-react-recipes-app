@@ -55,6 +55,8 @@ function RecipePage() {
           <p>{recipe.strInstructions}</p>
         </div>
       </section>
+      {!isInProgressPage && (
+      <>
       <section className="details-page-section">
         <h3>Video</h3>
       </section>
