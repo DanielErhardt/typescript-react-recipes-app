@@ -69,11 +69,26 @@ function RecipePage() {
           ))}
         </div>
       </section>
+      </>
+      )}
+      {isInProgressPage ? (
       <button
         type="button"
       >
-        Start Recipe
+          Finish Recipe
       </button>
+      ) : (
+        <>
+          {!isRecipeDone(recipe) && (
+            <button
+              type="button"
+              onClick={() => navigate(`${path}/in-progress`)}
+            >
+              { isRecipeInProgress(recipe) ? 'Continue Recipe' : 'Start Recipe' }
+            </button>
+          )}
+        </>
+      )}
     </main>
   );
 }
