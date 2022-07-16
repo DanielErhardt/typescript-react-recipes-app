@@ -6,6 +6,7 @@ import RecipesContext from '../context/RecipesContext';
 import { fetchRecipeById } from '../services/RecipesAPI';
 import IngredientsList from '../components/IngredientsList';
 import RecipeCard from '../components/RecipeCard';
+import { isRecipeDone, isRecipeInProgress, saveDoneRecipe } from '../services/LocalStorageManager';
 
 // const extractTags = (tags) => {
 //   // Regex taken from https://stackoverflow.com/questions/650022/how-do-i-split-a-string-with-multiple-separators-in-javascript
