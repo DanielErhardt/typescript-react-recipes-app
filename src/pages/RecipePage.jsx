@@ -2,6 +2,7 @@ import React, {
   useContext, useEffect, useState, useMemo,
 } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 import RecipesContext from '../context/RecipesContext';
 import { fetchRecipeById } from '../services/RecipesAPI';
 import IngredientsList from '../components/IngredientsList';
@@ -18,7 +19,9 @@ import { isRecipeDone, isRecipeInProgress, saveDoneRecipe } from '../services/Lo
 function RecipePage() {
   const [finished, setFinished] = useState(false);
   const [recipe, setRecipe] = useState({});
-  const { recipeType, recipes, fetchAll } = useContext(RecipesContext);
+  const {
+    recipeType, recipes, fetchAll, resetRecipes,
+  } = useContext(RecipesContext);
   const { recipeId } = useParams();
   const { pathname: path } = useLocation();
   const navigate = useNavigate();
@@ -33,6 +36,10 @@ function RecipePage() {
     };
     fetch();
     fetchAll(true);
+
+    return () => {
+      resetRecipes();
+    };
   }, []);
 
   const onProgressChanged = (allChecked) => setFinished(allChecked);
@@ -69,6 +76,7 @@ function RecipePage() {
       <>
         <section className="details-page-section">
           <h3>Video</h3>
+          <ReactPlayer width="100%" height="100%" />
         </section>
         <section className="details-page-section">
           <h3>Recommended</h3>
