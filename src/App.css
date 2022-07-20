@@ -91,6 +91,20 @@ li input {
   border-radius:2vh;
 }
 
+.sideways-menu {
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+  padding: 5px;
+  gap: 3px
+}
+
+.sideways-nav-bar button {
+  padding: 4px 6px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+}
+
 .drop-down-menu {
   display: flex;
   justify-content: center;
