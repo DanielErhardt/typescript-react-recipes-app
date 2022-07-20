@@ -7,6 +7,7 @@ import RecipesContext from '../context/RecipesContext';
 import ListsContext from '../context/ListsContext';
 import LabeledInput from './inputs/LabeledInput';
 import ModalWindow from './ModalWindow';
+import SidewaysMenu from './SidewaysMenu';
 
 const INGREDIENT_FILTER = 'Ingredient';
 const FIRST_LETTER_FILTER = 'First Letter';
@@ -15,34 +16,43 @@ const SEARCH_FILTERS = [INGREDIENT_FILTER, FIRST_LETTER_FILTER];
 
 function Header({ title, showSearchBar }) {
   const {
-    fetchAll, fetchByName, fetchByIngredient, fetchByFirstLetter,
+    fetchAll, fetchByCategory,
+    filterByName, filterByIngredient, filterByFirstLetter,
   } = useContext(RecipesContext);
   const { categories } = useContext(ListsContext);
   const [searchValue, setSearchValue] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('');
   const [modalMessage, setModalMessage] = useState('');
 
-  const onSearchChanged = ({ target: { value } }) => setSearchValue(value);
-
-  const onFilterChanged = ({ target: { id } }) => {
-    setSelectedFilter(id);
-  };
-
-  const search = () => {
+  const search = async () => {
     switch (selectedFilter) {
       case INGREDIENT_FILTER:
-        fetchByIngredient(searchValue);
+        await fetchAll();
+        filterByIngredient(searchValue);
         break;
       case FIRST_LETTER_FILTER:
         if (searchValue.length !== 1) setModalMessage('A search with this filter must contain only one character.');
         else if (!searchValue.match(/[a-z]/i)) setModalMessage('A search with this filter must be a letter.');
-        else fetchByFirstLetter(searchValue);
+        else {
+          await fetchAll();
+          filterByFirstLetter(searchValue);
+        }
         break;
       default:
-        if (searchValue) fetchByName(searchValue);
-        else fetchAll();
+        await fetchAll();
+        if (searchValue) filterByName(searchValue);
         break;
     }
+  };
+
+  const onOptionClick = ({ target: { name } }) => {
+    fetchByCategory(name);
+  };
+
+  const onSearchChanged = ({ target: { value } }) => setSearchValue(value);
+
+  const onFilterChanged = ({ target: { id } }) => {
+    setSelectedFilter(id);
   };
 
   const clearFilter = () => {
@@ -73,37 +83,40 @@ function Header({ title, showSearchBar }) {
       <h1 className="header-title">{title}</h1>
       {showSearchBar && (
         <>
-      <LabeledInput
-        divClassName="input header-search-bar"
-        className="search-input"
-        type="search"
-        name="search"
-        value={searchValue}
-        onChange={onSearchChanged}
-        placeholder="Search Recipe"
-        label={searchButton}
-        labelToRight
-      />
-
-      <div className="header-search-filters">
-        {SEARCH_FILTERS.map((filter) => (
           <LabeledInput
-            key={`${filter} filter`}
-            id={filter}
-            type="radio"
-            name={HEADER_SEARCH_FILTER}
-            label={filter}
-            onChange={onFilterChanged}
+            divClassName="input header-search-bar"
+            className="search-input"
+            type="search"
+            name="search"
+            value={searchValue}
+            onChange={onSearchChanged}
+            placeholder="Search Recipe"
+            label={searchButton}
+            labelToRight
           />
-        ))}
 
-        <button
-          type="button"
-          onClick={clearFilter}
-        >
-          Clear
-        </button>
-      </div>
+          <div className="header-search-filters">
+            {SEARCH_FILTERS.map((filter) => (
+              <LabeledInput
+                key={`${filter} filter`}
+                id={filter}
+                type="radio"
+                name={HEADER_SEARCH_FILTER}
+                label={filter}
+                onChange={onFilterChanged}
+              />
+            ))}
+
+            <button
+              type="button"
+              onClick={clearFilter}
+            >
+              Clear
+            </button>
+          </div>
+        </>
+      )}
+      <SidewaysMenu options={categories} onOptionClick={onOptionClick} />
     </header>
   );
 }
