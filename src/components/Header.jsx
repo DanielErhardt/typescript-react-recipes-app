@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useKeyPress } from '../hooks/KeyboardEventListeners';
 import { defaultIconConfig as ic } from '../helpers';
 import RecipesContext from '../context/RecipesContext';
+import ListsContext from '../context/ListsContext';
 import LabeledInput from './inputs/LabeledInput';
 import ModalWindow from './ModalWindow';
 
@@ -16,6 +17,7 @@ function Header({ title }) {
   const {
     fetchAll, fetchByName, fetchByIngredient, fetchByFirstLetter,
   } = useContext(RecipesContext);
+  const { categories } = useContext(ListsContext);
   const [searchValue, setSearchValue] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('');
   const [modalMessage, setModalMessage] = useState('');
