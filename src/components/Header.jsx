@@ -13,7 +13,7 @@ const FIRST_LETTER_FILTER = 'First Letter';
 const HEADER_SEARCH_FILTER = 'header-search-filter';
 const SEARCH_FILTERS = [INGREDIENT_FILTER, FIRST_LETTER_FILTER];
 
-function Header({ title }) {
+function Header({ title, showSearchBar }) {
   const {
     fetchAll, fetchByName, fetchByIngredient, fetchByFirstLetter,
   } = useContext(RecipesContext);
@@ -71,6 +71,8 @@ function Header({ title }) {
     <header>
       <ModalWindow message={modalMessage} onClose={() => setModalMessage('')} />
       <h1 className="header-title">{title}</h1>
+      {showSearchBar && (
+        <>
       <LabeledInput
         divClassName="input header-search-bar"
         className="search-input"
@@ -106,7 +108,12 @@ function Header({ title }) {
   );
 }
 
+Header.defaultProps = {
+  showSearchBar: false,
+};
+
 Header.propTypes = {
+  showSearchBar: PropTypes.bool,
   title: PropTypes.string.isRequired,
 };
 
