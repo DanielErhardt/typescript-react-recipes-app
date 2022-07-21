@@ -31,9 +31,11 @@ function Header({ title, showSearchBar }) {
         filterByIngredient(searchValue);
         break;
       case FIRST_LETTER_FILTER:
-        if (searchValue.length !== 1) setModalMessage('A search with this filter must contain only one character.');
-        else if (!searchValue.match(/[a-z]/i)) setModalMessage('A search with this filter must be a letter.');
-        else {
+        if (searchValue.length !== 1) {
+          setModalMessage('A search with this filter must contain only one character.');
+        } else if (!searchValue.match(/[a-z]/i)) {
+          setModalMessage('A search with this filter must be a letter.');
+        } else {
           await fetchAll();
           filterByFirstLetter(searchValue);
         }
