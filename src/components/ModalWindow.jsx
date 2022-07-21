@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 function ModalWindow({ message, onClose }) {
   return ReactDOM.createPortal(
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {message.length > 0 && (
       <div className="modal-background">
