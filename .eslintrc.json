@@ -1,13 +1,42 @@
 {
-  "extends": ["airbnb"],
-  "rules": {
-    "no-unused-vars": "warn",
-    "func-names":"off",
-    "max-len":"warn",
-    "react/jsx-no-useless-fragment":"off"
-  },
-  "env": {
-    "browser": true,
-    "node": true
-}
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react-hooks",
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "import/prefer-default-export": "off",
+        "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
+        "react/prop-types": "off",
+        "max-len": ["warn", { "code": 100 }],
+
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error"]
+        
+        // "react/function-component-definition": [
+        //     {
+        //       "namedComponents": "arrow-function",
+        //       "unnamedComponents": "arrow-function"
+        //     }        
+        // ]
+    }
 }
