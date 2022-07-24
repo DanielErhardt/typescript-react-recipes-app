@@ -1,9 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 
-function ModalWindow({ message, onClose }) {
-  return ReactDOM.createPortal(
+interface Props {
+  message: string[],
+  onClose: () => void,
+}
+
+const portal = document.getElementById('portal') as HTMLElement;
+
+function ModalWindow({ message, onClose }: Props) {
+  return createPortal(
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {message.length > 0 && (
@@ -16,13 +22,8 @@ function ModalWindow({ message, onClose }) {
       </div>
       )}
     </>,
-    document.getElementById('portal'),
+    portal,
   );
 }
-
-ModalWindow.propTypes = {
-  message: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
 
 export default ModalWindow;
