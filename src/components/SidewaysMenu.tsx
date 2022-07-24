@@ -1,7 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { MouseEventHandler } from 'react';
 
-function SidewaysMenu({ options, onOptionClick }) {
+interface Props {
+  options: string[],
+  onOptionClick: MouseEventHandler,
+}
+
+function SidewaysMenu({ options, onOptionClick }: Props) {
   return (
     <nav className="sideways-menu">
       {options.map((o) => (
@@ -17,10 +21,5 @@ function SidewaysMenu({ options, onOptionClick }) {
     </nav>
   );
 }
-
-SidewaysMenu.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onOptionClick: PropTypes.func.isRequired,
-};
 
 export default SidewaysMenu;
