@@ -38,9 +38,9 @@ export const saveFavoriteRecipe = (recipe: Recipe): void => saveRecipeInArray(FA
 export const removeFavoriteRecipe = (recipe: Recipe): void => removeRecipeFromArray(FAVORITE_RECIPES, recipe);
 export const isRecipeFavorite = (recipe: Recipe): boolean => isRecipeInArray(FAVORITE_RECIPES, recipe);
 
-export const loadDoneRecipes = () => loadRecipeArray(DONE_RECIPES);
-export const saveDoneRecipe = (recipe: Recipe) => saveRecipeInArray(DONE_RECIPES, recipe);
-export const isRecipeDone = (recipe: Recipe) => isRecipeInArray(DONE_RECIPES, recipe);
+export const loadDoneRecipes = (): Recipe[] => loadRecipeArray(DONE_RECIPES);
+export const saveDoneRecipe = (recipe: Recipe): void => saveRecipeInArray(DONE_RECIPES, recipe);
+export const isRecipeDone = (recipe: Recipe): void => isRecipeInArray(DONE_RECIPES, recipe);
 
 const loadRecipesInProgress = (): SavedRecipesProgressType => JSON.parse(localStorage.getItem(RECIPES_PROGRESS) as string) || {};
 export const loadRecipeProgress = (recipe: Recipe): string[] => loadRecipesInProgress()[recipe.id] || [];
