@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { useKeyPress } from '../hooks/KeyboardEventListeners';
 import { defaultIconConfig as ic } from '../helpers';
 import RecipesContext from '../context/RecipesContext';
-import ListsContext from '../context/ListsContext';
 import LabeledInput from './inputs/LabeledInput';
 import ModalWindow from './ModalWindow';
 import SidewaysMenu from './SidewaysMenu';
@@ -16,10 +15,10 @@ const SEARCH_FILTERS = [INGREDIENT_FILTER, FIRST_LETTER_FILTER];
 
 function Header({ title, showSearchBar }) {
   const {
+    categories,
     fetchAll, fetchByCategory,
     filterByName, filterByIngredient, filterByFirstLetter,
   } = useContext(RecipesContext);
-  const { categories } = useContext(ListsContext);
   const [searchValue, setSearchValue] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('');
   const [modalMessage, setModalMessage] = useState('');
