@@ -18,3 +18,7 @@ export type RecipesContextType ={
   ingredients: string[];
   nationalities: string[] | null;
 };
+
+export type SavedRecipesProgressType = {
+  [key: string]: string[],
+};

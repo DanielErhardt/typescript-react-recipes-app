@@ -1,5 +1,5 @@
 import Recipe from '../classes/Recipe';
-import { RecipesProgressType } from '../@types';
+import { SavedRecipesProgressType } from '../@types';
 
 const USER = 'user';
 const MEALS_TOKEN = 'mealsToken';
@@ -42,7 +42,7 @@ export const loadDoneRecipes = () => loadRecipeArray(DONE_RECIPES);
 export const saveDoneRecipe = (recipe: Recipe) => saveRecipeInArray(DONE_RECIPES, recipe);
 export const isRecipeDone = (recipe: Recipe) => isRecipeInArray(DONE_RECIPES, recipe);
 
-const loadRecipesInProgress = (): RecipesProgressType => JSON.parse(localStorage.getItem(RECIPES_PROGRESS) as string) || {};
+const loadRecipesInProgress = (): SavedRecipesProgressType => JSON.parse(localStorage.getItem(RECIPES_PROGRESS) as string) || {};
 export const loadRecipeProgress = (recipe: Recipe): string[] => loadRecipesInProgress()[recipe.id] || [];
 export const saveRecipeProgress = (recipe: Recipe, usedIngredients: string[]): void => {
   const progress = { ...loadRecipesInProgress(), [recipe.id]: usedIngredients };
