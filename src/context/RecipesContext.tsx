@@ -1,6 +1,15 @@
 import { createContext } from 'react';
 import { RecipesContextType } from '../@types';
 
-const RecipesContext = createContext<RecipesContextType | null>(null);
+const RecipesContext = createContext<RecipesContextType>({
+  recipes: [],
+  updateRecipes: () => {},
+  resetRecipes: () => {},
+  getRecipeType: () => '',
+  isSearchingForMeals: () => true,
+  categories: [],
+  ingredients: [],
+  nationalities: null,
+});
 
 export default RecipesContext;
