@@ -1,13 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ChangeEventHandler } from 'react';
 import { createId } from '../helpers';
+
+type Props = {
+  label: string | undefined;
+  options: string[];
+  onChange: ChangeEventHandler<HTMLSelectElement>;
+  labelToRight?: boolean;
+}
 
 function DropDownMenu({
   label, options, onChange, labelToRight,
-}) {
+}: Props): JSX.Element {
   const id = createId();
 
-  const labelElement = (
+  const labelElement: JSX.Element = (
     <label htmlFor={id}>
       {label}
     </label>
@@ -28,13 +34,6 @@ function DropDownMenu({
 
 DropDownMenu.defaultProps = {
   labelToRight: false,
-};
-
-DropDownMenu.propTypes = {
-  label: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onChange: PropTypes.func.isRequired,
-  labelToRight: PropTypes.bool,
 };
 
 export default DropDownMenu;
