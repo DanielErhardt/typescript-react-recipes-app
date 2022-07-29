@@ -19,7 +19,7 @@ const SEARCH_FILTERS = [INGREDIENT_FILTER, FIRST_LETTER_FILTER];
 
 type Props = {
   title: string;
-  showSearchBar: boolean;
+  showSearchBar?: boolean;
 };
 
 function Header({ title, showSearchBar }: Props): JSX.Element {
@@ -126,5 +126,9 @@ function Header({ title, showSearchBar }: Props): JSX.Element {
     </header>
   );
 }
+
+Header.defaultProps = {
+  showSearchBar: false,
+};
 
 export default Header;
