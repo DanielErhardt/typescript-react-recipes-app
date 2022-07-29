@@ -11,8 +11,15 @@ const getBaseURL = (type: string): string => (type === MEALS_TYPE
   ? MEALS_BASE_API : COCKTAILS_BASE_API);
 
 const fetchBase = async (URL: string): Promise<APIResponseType> => {
-  const response = await fetch(URL);
-  const data = await response.json();
+  let data;
+  try {
+    const response = await fetch(URL);
+    data = await response.json();
+  } catch (e) {
+    console.log('Couldn\'t communicate with server.'); // eslint-disable-line
+    // TODO Call Modal with message.
+  }
+
   return data;
 };
 
