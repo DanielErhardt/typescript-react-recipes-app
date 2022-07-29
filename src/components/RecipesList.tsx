@@ -2,29 +2,33 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import RecipeCard from './RecipeCard';
 import RecipesContext from '../context/RecipesContext';
+import { fetchAllRecipes } from '../services/RecipesAPI';
 
-function RecipesList() {
-  const { recipes, resetRecipes, fetchAll } = useContext(RecipesContext);
+function RecipesList(): JSX.Element {
+  const {
+    recipes, resetRecipes, updateRecipes, getRecipeType,
+  } = useContext(RecipesContext);
   const navigate = useNavigate();
   const { pathname: path } = useLocation();
 
   useEffect(() => {
-    if (recipes) {
-      if (recipes.length === 0) fetchAll();
+    const execute = async () => {
       if (recipes.length === 1) {
-        navigate(`${path}/${recipes[0].idMeal || recipes[0].idDrink}`);
+        navigate(`${path}/${recipes[0].id}`);
         resetRecipes();
+      } else {
+        updateRecipes(await fetchAllRecipes(getRecipeType()));
       }
-    } else {
-      fetchAll();
-    }
+    };
+
+    execute();
   }, [recipes]);
 
   return (
     <div className="recipes-list">
       {recipes && recipes.map((recipe) => (
         <RecipeCard
-          key={recipe.idMeal || recipe.idDrink}
+          key={recipe.id}
           recipe={recipe}
         />
       ))}
