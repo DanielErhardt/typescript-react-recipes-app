@@ -40,7 +40,7 @@ export const isRecipeFavorite = (recipe: Recipe): boolean => isRecipeInArray(FAV
 
 export const loadDoneRecipes = (): Recipe[] => loadRecipeArray(DONE_RECIPES);
 export const saveDoneRecipe = (recipe: Recipe): void => saveRecipeInArray(DONE_RECIPES, recipe);
-export const isRecipeDone = (recipe: Recipe): void => isRecipeInArray(DONE_RECIPES, recipe);
+export const isRecipeDone = (recipe: Recipe): boolean => isRecipeInArray(DONE_RECIPES, recipe);
 
 const loadRecipesInProgress = (): SavedRecipesProgressType => JSON.parse(localStorage.getItem(RECIPES_PROGRESS) as string) || {};
 export const loadRecipeProgress = (recipe: Recipe): string[] => loadRecipesInProgress()[recipe.id] || [];
