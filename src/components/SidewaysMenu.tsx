@@ -5,7 +5,7 @@ interface Props {
   onOptionClick: MouseEventHandler,
 }
 
-function SidewaysMenu({ options, onOptionClick }: Props) {
+function SidewaysMenu({ options, onOptionClick }: Props): JSX.Element {
   return (
     <nav className="sideways-menu">
       {options.map((o) => (
