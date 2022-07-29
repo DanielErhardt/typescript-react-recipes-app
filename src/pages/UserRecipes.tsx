@@ -1,6 +1,6 @@
 import React from 'react';
 
-function UserRecipes() {
+function UserRecipes(): JSX.Element {
   return (
     <div>UserRecipes</div>
   );

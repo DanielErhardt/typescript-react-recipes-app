@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DoneRecipeCard() {
+function DoneRecipeCard(): JSX.Element {
   return (
     <div>DoneRecipeCard</div>
   );

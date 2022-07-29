@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ExplorePage() {
+function ExplorePage(): JSX.Element {
   return (
     <div>ExplorePage</div>
   );

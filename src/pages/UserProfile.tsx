@@ -1,6 +1,6 @@
 import React from 'react';
 
-function UserProfile() {
+function UserProfile(): JSX.Element {
   return (
     <div>UserProfile</div>
   );

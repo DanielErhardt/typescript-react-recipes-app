@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FavoriteRecipeCard() {
+function FavoriteRecipeCard(): JSX.Element {
   return (
     <div>FavoriteRecipeCard</div>
   );

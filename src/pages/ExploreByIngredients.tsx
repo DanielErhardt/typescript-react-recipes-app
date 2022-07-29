@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ExploreByIngredients() {
+function ExploreByIngredients(): JSX.Element {
   return (
     <div>ExploreByIngredients</div>
   );

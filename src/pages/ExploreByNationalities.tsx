@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ExploreByNationalities() {
+function ExploreByNationalities(): JSX.Element {
   return (
     <div>ExploreByNationalities</div>
   );

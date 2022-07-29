@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NotFound() {
+function NotFound(): JSX.Element {
   return (
     <div>NotFound</div>
   );
