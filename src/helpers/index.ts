@@ -1,4 +1,6 @@
-export const createId = (length = 8) => {
+import { IconWeight } from 'phosphor-react';
+
+export const createId = (length: number = 8): string => {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
@@ -9,7 +11,7 @@ export const createId = (length = 8) => {
 };
 
 export const defaultIconConfig = {
-  weight: 'bold',
+  weight: 'bold' as IconWeight,
   size: '24px',
   color: 'black',
 };
