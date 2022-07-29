@@ -4,10 +4,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipesList from '../components/RecipesList';
 
-function MainPage() {
-  const { isInMealsPage } = useContext(RecipesContext);
+function MainPage(): JSX.Element {
+  const { isSearchingForMeals } = useContext(RecipesContext);
 
-  const getTitle = () => (isInMealsPage ? 'Meals' : 'Cocktails');
+  const getTitle = (): string => (isSearchingForMeals() ? 'Meals' : 'Cocktails');
 
   return (
     <>
