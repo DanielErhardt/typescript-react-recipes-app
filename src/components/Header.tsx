@@ -1,65 +1,73 @@
-import React, { useState, useContext } from 'react';
+import React, {
+  useState, useContext, MouseEvent, KeyboardEvent,
+} from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
-import PropTypes from 'prop-types';
-import { useKeyPress } from '../hooks/KeyboardEventListeners';
 import { defaultIconConfig as ic } from '../helpers';
 import RecipesContext from '../context/RecipesContext';
-import LabeledInput from './inputs/LabeledInput';
-import ModalWindow from './ModalWindow';
+import LabeledInput from './LabeledInput';
 import SidewaysMenu from './SidewaysMenu';
+import {
+  fetchAllRecipes, fetchRecipesByFirstLetter, fetchRecipesByName,
+  fetchRecipesByIngredient, fetchRecipesByCategory,
+} from '../services/RecipesAPI';
+import { RecipesContextType } from '../@types';
 
 const INGREDIENT_FILTER = 'Ingredient';
 const FIRST_LETTER_FILTER = 'First Letter';
 const HEADER_SEARCH_FILTER = 'header-search-filter';
 const SEARCH_FILTERS = [INGREDIENT_FILTER, FIRST_LETTER_FILTER];
 
-function Header({ title, showSearchBar }) {
+type Props = {
+  title: string;
+  showSearchBar: boolean;
+};
+
+function Header({ title, showSearchBar }: Props): JSX.Element {
   const {
-    categories,
-    fetchAll, fetchByCategory,
-    filterByName, filterByIngredient, filterByFirstLetter,
-  } = useContext(RecipesContext);
-  const [searchValue, setSearchValue] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState('');
-  const [modalMessage, setModalMessage] = useState('');
+    categories, updateRecipes, getRecipeType,
+  } = useContext<RecipesContextType>(RecipesContext);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [selectedFilter, setSelectedFilter] = useState<string>('');
 
   const search = async () => {
     switch (selectedFilter) {
       case INGREDIENT_FILTER:
-        await fetchAll();
-        filterByIngredient(searchValue);
+        updateRecipes(await fetchRecipesByIngredient(getRecipeType(), searchValue));
         break;
       case FIRST_LETTER_FILTER:
         if (searchValue.length !== 1) {
-          setModalMessage('A search with this filter must contain only one character.');
+          window.alert('A search with this filter must contain only one character.'); // eslint-disable-line
         } else if (!searchValue.match(/[a-z]/i)) {
-          setModalMessage('A search with this filter must be a letter.');
+          window.alert('A search with this filter must be a letter.'); // eslint-disable-line
         } else {
-          await fetchAll();
-          filterByFirstLetter(searchValue);
+          updateRecipes(await fetchRecipesByFirstLetter(getRecipeType(), searchValue));
         }
         break;
       default:
-        await fetchAll();
-        if (searchValue) filterByName(searchValue);
+        if (searchValue) updateRecipes(await fetchRecipesByName(getRecipeType(), searchValue));
+        else updateRecipes(await fetchAllRecipes(getRecipeType()));
         break;
     }
   };
 
-  const onOptionClick = ({ target: { name } }) => {
-    fetchByCategory(name);
+  const onOptionClick = ({ currentTarget: { name } }: MouseEvent<HTMLButtonElement>) => {
+    fetchRecipesByCategory(getRecipeType(), name);
   };
 
-  const onSearchChanged = ({ target: { value } }) => setSearchValue(value);
+  const onSearchChanged = ({ currentTarget: { value } }: KeyboardEvent<HTMLInputElement>) => setSearchValue(value);
 
-  const onFilterChanged = ({ target: { id } }) => {
+  const onFilterChanged = ({ currentTarget: { id } }: KeyboardEvent<HTMLInputElement>) => {
     setSelectedFilter(id);
+  };
+
+  const onEnterPressed = ({ code } : KeyboardEvent<HTMLInputElement>) => {
+    if (code === 'Enter' || code === 'NumpadEnter') { search(); }
   };
 
   const clearFilter = () => {
     document.getElementsByName(HEADER_SEARCH_FILTER)
       .forEach((radio) => {
-        const ref = radio;
+        const ref = radio as HTMLInputElement;
         ref.checked = false;
       });
     setSelectedFilter('');
@@ -75,22 +83,19 @@ function Header({ title, showSearchBar }) {
     </button>
   );
 
-  useKeyPress('Enter', () => search());
-  useKeyPress('NumpadEnter', () => search());
-
   return (
     <header>
-      <ModalWindow message={modalMessage} onClose={() => setModalMessage('')} />
       <h1 className="header-title">{title}</h1>
       {showSearchBar && (
         <>
           <LabeledInput
-            divClassName="input header-search-bar"
+            parentClassName="input header-search-bar"
             className="search-input"
             type="search"
             name="search"
             value={searchValue}
             onChange={onSearchChanged}
+            onKeyDown={onEnterPressed}
             placeholder="Search Recipe"
             label={searchButton}
             labelToRight
@@ -121,14 +126,5 @@ function Header({ title, showSearchBar }) {
     </header>
   );
 }
-
-Header.defaultProps = {
-  showSearchBar: false,
-};
-
-Header.propTypes = {
-  showSearchBar: PropTypes.bool,
-  title: PropTypes.string.isRequired,
-};
 
 export default Header;
