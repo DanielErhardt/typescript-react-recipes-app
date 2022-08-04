@@ -1,6 +1,6 @@
 import { APIObjectType } from '../@types';
 import { loadRecipe, saveRecipe } from '../services/LocalStorageManager';
-import { FOODS_TYPE, DRINKS_TYPE } from '../services/RecipesAPI';
+import { MEALS_TYPE, DRINKS_TYPE } from '../services/RecipesAPI';
 import type { Ingrendient } from '../@types';
 
 // eslint-disable-next-line max-len
@@ -40,7 +40,7 @@ export default class Recipe {
     this.youtubeLink = recipe?.strYoutube || '';
     this.tags = recipe?.strTags ? recipe.strTags.split(tagsSeparator) : [];
 
-    const getType = (r: APIObjectType): string => (r.idMeal ? FOODS_TYPE : DRINKS_TYPE);
+    const getType = (r: APIObjectType): string => (r.idMeal ? MEALS_TYPE : DRINKS_TYPE);
     this.recipeType = recipe ? getType(recipe) : '';
 
     const ingNames = extractList(recipe || {}, 'Ingredient');

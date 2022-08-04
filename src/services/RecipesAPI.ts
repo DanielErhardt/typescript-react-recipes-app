@@ -2,13 +2,13 @@ import { loadCocktailsToken, loadMealsToken } from './LocalStorageManager';
 import { APIResponseType } from '../@types';
 
 export const MEALS_TYPE = 'meals';
-export const COCKTAILS_TYPE = 'drinks';
+export const DRINKS_TYPE = 'drinks';
 
-const MEALS_BASE_API = `https://www.themealdb.com/api/json/v1/${loadMealsToken()}`;
-const COCKTAILS_BASE_API = `https://www.thecocktaildb.com/api/json/v1/${loadCocktailsToken()}`;
+const FOODS_BASE_API = `https://www.themealdb.com/api/json/v1/${loadMealsToken()}`;
+const DRINKS_BASE_API = `https://www.thecocktaildb.com/api/json/v1/${loadCocktailsToken()}`;
 
 const getBaseURL = (type: string): string => (type === MEALS_TYPE
-  ? MEALS_BASE_API : COCKTAILS_BASE_API);
+  ? FOODS_BASE_API : DRINKS_BASE_API);
 
 const fetchBase = async (URL: string): Promise<APIResponseType> => {
   let data;
