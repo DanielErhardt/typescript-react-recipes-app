@@ -5,7 +5,7 @@ import {
   MEALS_TYPE, COCKTAILS_TYPE,
   fetchAllMealsAreas, fetchCategories, fetchIngredients,
 } from '../services/RecipesAPI';
-import { APIResponseType, APIObjectType, RecipesContextType } from '../@types';
+import { APIResponseType, RecipesContextType } from '../@types';
 import Recipe from '../classes/Recipe';
 
 type Props = {
@@ -21,14 +21,15 @@ function RecipesProvider({ children }: Props) {
   const [mealsNationalities, setMealsNationalities] = useState<string[]>([]);
   const { pathname } = useLocation();
 
-  const getRecipeType = (): string => (pathname.includes('meals') ? MEALS_TYPE : COCKTAILS_TYPE);
-  const isSearchingForMeals = (): boolean => getRecipeType() === MEALS_TYPE;
-
-  const extract = (data: APIResponseType): APIObjectType[] => (data ? data[getRecipeType()] : []);
+  const getRecipeType = (invert: boolean = false): string => {
+    if (invert) return pathname.includes('meals') ? DRINKS_TYPE : MEALS_TYPE;
+    return pathname.includes('meals') ? MEALS_TYPE : DRINKS_TYPE;
+  };
 
   const updateRecipes = (apiResponse: APIResponseType): void => {
-    const newRecipes = extract(apiResponse).map((apiRecipe) => new Recipe(apiRecipe));
-    setRecipes(newRecipes);
+    const responseType = apiResponse.meals ? MEALS_TYPE : DRINKS_TYPE;
+    const newRecipes = apiResponse[responseType].map((apiRecipe) => new Recipe(apiRecipe));
+    setRecipes(newRecipes || []);
   };
 
   useEffect(() => {
@@ -65,10 +66,9 @@ function RecipesProvider({ children }: Props) {
     updateRecipes,
     resetRecipes: () => setRecipes([]),
     getRecipeType,
-    isSearchingForMeals,
-    categories: isSearchingForMeals() ? mealsCategories : cocktailsCategories,
-    ingredients: isSearchingForMeals() ? mealsIngredients : cocktailsIngredients,
-    nationalities: isSearchingForMeals() ? mealsNationalities : null,
+    categories: getRecipeType() === MEALS_TYPE ? mealsCategories : cocktailsCategories,
+    ingredients: getRecipeType() === MEALS_TYPE ? mealsIngredients : cocktailsIngredients,
+    nationalities: getRecipeType() === MEALS_TYPE ? mealsNationalities : null,
   }), [recipes, pathname]);
 
   return (
