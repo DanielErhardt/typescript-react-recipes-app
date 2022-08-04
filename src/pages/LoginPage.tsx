@@ -26,12 +26,14 @@ function LoginPage(): JSX.Element {
   };
 
   const submitLogin = (): void => {
+    if (isLoginValid()) {
     // Fetch user credentials. If valid, proceed.
     // Fetch user tokens.
-    saveUser(input.email);
-    saveCocktailsToken('1');
-    saveMealsToken('1');
-    navigate('/meals');
+      saveUser(input.email);
+      saveCocktailsToken('1');
+      saveMealsToken('1');
+      navigate('/meals');
+    }
   };
 
   const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>): void => {
