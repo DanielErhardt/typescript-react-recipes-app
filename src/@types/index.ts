@@ -12,13 +12,13 @@ export type RecipesContextType ={
   recipes: Recipe[];
   updateRecipes: (apiResponse: APIResponseType) => void; // eslint-disable-line no-unused-vars
   resetRecipes: () => void;
-  getRecipeType: () => string;
-  isSearchingForMeals: () => boolean;
+  getRecipeType: (invert?: boolean) => string;
   categories: string[];
   ingredients: string[];
   nationalities: string[] | null;
 };
 
-export type SavedRecipesProgressType = {
-  [key: string]: string[],
+export type Ingrendient = {
+  name: string;
+  measure: string;
 };
