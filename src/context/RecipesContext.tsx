@@ -6,7 +6,6 @@ const RecipesContext = createContext<RecipesContextType>({
   updateRecipes: () => {},
   resetRecipes: () => {},
   getRecipeType: () => '',
-  isSearchingForMeals: () => true,
   categories: [],
   ingredients: [],
   nationalities: null,
