@@ -17,27 +17,27 @@ function App() {
     <BrowserRouter>
       <RecipesProvider>
         <Routes>
-          <Route exact path="/" element={<LoginPage />} />
-          <Route exact path="/meals" element={<MainPage />} />
-          <Route exact path="/cocktails" element={<MainPage />} />
-          <Route path="/meals/:recipeId" element={<RecipePage />} />
-          <Route path="/cocktails/:recipeId" element={<RecipePage />} />
-          <Route path="/meals/:recipeId/in-progress" element={<RecipePage />} />
-          <Route path="/cocktails/:recipeId/in-progress" element={<RecipePage />} />
-          <Route exact path="/explore" element={<ExplorePage />} />
-          <Route path="/explore/meals" element={<ExplorePage />} />
-          <Route path="/explore/cocktails" element={<ExplorePage />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/foods" element={<MainPage />} />
+          <Route path="/drinks" element={<MainPage />} />
+          <Route path="/foods/:id" element={<RecipePage />} />
+          <Route path="/drinks/:id" element={<RecipePage />} />
+          <Route path="/foods/:id/in-progress" element={<RecipePage />} />
+          <Route path="/drinks/:id/in-progress" element={<RecipePage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/explore/foods" element={<ExplorePage />} />
+          <Route path="/explore/drinks" element={<ExplorePage />} />
           <Route
-            path="/explore/meals/ingredients"
+            path="/explore/foods/ingredients"
             element={<ExploreByIngredients />}
           />
           <Route
-            path="/explore/cocktails/ingredients"
+            path="/explore/drinks/ingredients"
             element={<ExploreByIngredients />}
           />
           <Route
-            path="/explore/meals/nationalities"
-            component={<ExploreByNationalities />}
+            path="/explore/foods/nationalities"
+            element={<ExploreByNationalities />}
           />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/done-recipes" element={<UserRecipes />} />
