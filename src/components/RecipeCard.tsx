@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Recipe from '../classes/Recipe';
 
 interface Props{
@@ -7,20 +7,23 @@ interface Props{
 }
 
 function RecipeCard({ recipe }: Props) {
-  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const {
-    id, name, thumb, category,
+    id, name, thumb, category, recipeType,
   } = recipe;
   return (
-    <Link
+    <button
       className="recipe-card"
-      to={`${pathname}/${id}`}
+      onClick={() => {
+        navigate(`../${recipeType}/${id}`);
+        navigate(0); // Apparently there's a bug where react v6 useNavigate doesn't refresh sometimes. This line forces it.
+      }}
       type="button"
     >
       <img src={thumb} alt="recipe thumb" />
       <h2>{name}</h2>
       {category && <p>{`${category}`}</p>}
-    </Link>
+    </button>
   );
 }
 

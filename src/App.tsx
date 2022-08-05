@@ -18,17 +18,17 @@ function App() {
       <RecipesProvider>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/foods" element={<MainPage />} />
+          <Route path="/meals" element={<MainPage />} />
           <Route path="/drinks" element={<MainPage />} />
-          <Route path="/foods/:id" element={<RecipePage />} />
+          <Route path="/meals/:id" element={<RecipePage />} />
           <Route path="/drinks/:id" element={<RecipePage />} />
-          <Route path="/foods/:id/in-progress" element={<RecipePage />} />
+          <Route path="/meals/:id/in-progress" element={<RecipePage />} />
           <Route path="/drinks/:id/in-progress" element={<RecipePage />} />
           <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/explore/foods" element={<ExplorePage />} />
+          <Route path="/explore/meals" element={<ExplorePage />} />
           <Route path="/explore/drinks" element={<ExplorePage />} />
           <Route
-            path="/explore/foods/ingredients"
+            path="/explore/meals/ingredients"
             element={<ExploreByIngredients />}
           />
           <Route
@@ -36,7 +36,7 @@ function App() {
             element={<ExploreByIngredients />}
           />
           <Route
-            path="/explore/foods/nationalities"
+            path="/explore/meals/nationalities"
             element={<ExploreByNationalities />}
           />
           <Route path="/profile" element={<UserProfile />} />

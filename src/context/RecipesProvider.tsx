@@ -5,7 +5,7 @@ import {
   MEALS_TYPE, DRINKS_TYPE,
   fetchAllMealsAreas, fetchCategories, fetchIngredients,
 } from '../services/RecipesAPI';
-import { APIResponseType, APIObjectType, RecipesContextType } from '../@types';
+import { APIDataType, RecipesContextType } from '../@types';
 import Recipe from '../classes/Recipe';
 
 type Props = {
@@ -14,19 +14,19 @@ type Props = {
 
 function RecipesProvider({ children }: Props) {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [cocktailsCategories, setCocktailsCategories] = useState<string[]>([]);
-  const [cocktailsIngredients, setCocktailsIngredients] = useState<string[]>([]);
-  const [foodsCategories, setFoodsCategories] = useState<string[]>([]);
-  const [foodsIngredients, setFoodsIngredients] = useState<string[]>([]);
-  const [foodsNationalities, setFoodsNationalities] = useState<string[]>([]);
+  const [drinksCategories, setDrinksCategories] = useState<string[]>([]);
+  const [drinksIngredients, setDrinksIngredients] = useState<string[]>([]);
+  const [mealsCategories, setMealsCategories] = useState<string[]>([]);
+  const [mealsIngredients, setMealsIngredients] = useState<string[]>([]);
+  const [mealsNationalities, setMealsNationalities] = useState<string[]>([]);
   const { pathname } = useLocation();
 
   const getRecipeType = (invert: boolean = false): string => {
-    if (invert) return pathname.includes('foods') ? DRINKS_TYPE : MEALS_TYPE;
-    return pathname.includes('foods') ? MEALS_TYPE : DRINKS_TYPE;
+    if (invert) return pathname.includes('meals') ? DRINKS_TYPE : MEALS_TYPE;
+    return pathname.includes('meals') ? MEALS_TYPE : DRINKS_TYPE;
   };
 
-  const updateRecipes = (apiResponse: APIResponseType): void => {
+  const updateRecipes = (apiResponse: APIDataType): void => {
     const responseType = apiResponse.meals ? MEALS_TYPE : DRINKS_TYPE;
     const newRecipes = apiResponse[responseType].map((apiRecipe) => new Recipe(apiRecipe));
     setRecipes(newRecipes || []);
@@ -44,18 +44,18 @@ function RecipesProvider({ children }: Props) {
         ],
       );
 
-      const foodsCatArray = mCat.meals.map((cat) => cat.strCategory);
-      foodsCatArray.unshift('All');
-      const cocktailsCatArray = cCat.drinks.map((cat) => cat.strCategory);
-      cocktailsCatArray.unshift('All');
-      const foodsNatArray = mNat.meals.map((nat) => nat.strArea);
-      foodsNatArray.unshift('None');
+      const mealsCatArray = mCat.meals.map((cat) => cat.strCategory);
+      mealsCatArray.unshift('All');
+      const drinksCatArray = cCat.drinks.map((cat) => cat.strCategory);
+      drinksCatArray.unshift('All');
+      const mealsNatArray = mNat.meals.map((nat) => nat.strArea);
+      mealsNatArray.unshift('None');
 
-      setFoodsCategories(foodsCatArray);
-      setCocktailsCategories(cocktailsCatArray);
-      setFoodsIngredients(mIng.meals.map((ing) => ing.strIngredient));
-      setCocktailsIngredients(cIng.drinks.map((ing) => ing.strIngredient1));
-      setFoodsNationalities(foodsNatArray);
+      setMealsCategories(mealsCatArray);
+      setDrinksCategories(drinksCatArray);
+      setMealsIngredients(mIng.meals.map((ing) => ing.strIngredient));
+      setDrinksIngredients(cIng.drinks.map((ing) => ing.strIngredient1));
+      setMealsNationalities(mealsNatArray);
     };
 
     fetch();
@@ -66,9 +66,9 @@ function RecipesProvider({ children }: Props) {
     updateRecipes,
     resetRecipes: () => setRecipes([]),
     getRecipeType,
-    categories: getRecipeType() === MEALS_TYPE ? foodsCategories : cocktailsCategories,
-    ingredients: getRecipeType() === MEALS_TYPE ? foodsIngredients : cocktailsIngredients,
-    nationalities: getRecipeType() === MEALS_TYPE ? foodsNationalities : null,
+    categories: getRecipeType() === MEALS_TYPE ? mealsCategories : drinksCategories,
+    ingredients: getRecipeType() === MEALS_TYPE ? mealsIngredients : drinksIngredients,
+    nationalities: getRecipeType() === MEALS_TYPE ? mealsNationalities : null,
   }), [recipes, pathname]);
 
   return (
