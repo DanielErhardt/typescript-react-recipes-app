@@ -22,7 +22,7 @@ export type RecipesContextType ={
   nationalities: string[] | null;
 };
 
-export type Ingrendient = {
+export type Ingredient = {
   name: string;
   measure: string;
 };
