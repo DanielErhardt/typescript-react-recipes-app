@@ -8,6 +8,10 @@ export type APIDataType = {
   [key: string]: APIRecipeType[],
 };
 
+export type SavedRecipesType = {
+  [recipeId: string]: Recipe;
+};
+
 export type RecipesContextType ={
   recipes: Recipe[];
   updateRecipes: (apiResponse: APIDataType) => void; // eslint-disable-line no-unused-vars
