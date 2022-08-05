@@ -1,4 +1,4 @@
-import { APIObjectType } from '../@types';
+import { APIRecipeType } from '../@types';
 import { loadRecipe, saveRecipe } from '../services/LocalStorageManager';
 import { MEALS_TYPE, DRINKS_TYPE } from '../services/RecipesAPI';
 import type { Ingrendient } from '../@types';
@@ -7,7 +7,7 @@ import type { Ingrendient } from '../@types';
 // Regex taken from https://stackoverflow.com/questions/650022/how-do-i-split-a-string-with-multiple-separators-in-javascript
 const tagsSeparator = /(?:,| )+/;
 
-const extractList = (recipe: APIObjectType, keyName:string): string[] => (
+const extractList = (recipe: APIRecipeType, keyName:string): string[] => (
   Object.entries(recipe)
     .filter((e) => e[0].includes(keyName))
     .map((m) => m[1])
@@ -29,22 +29,22 @@ export default class Recipe {
   private favorite: boolean = false;
 
   constructor();
-  constructor(recipe: APIObjectType);
-  constructor(recipe?: APIObjectType) {
-    this.id = recipe?.idMeal || recipe?.idDrink || '';
-    this.name = recipe?.strMeal || recipe?.strDrink || '';
-    this.thumb = recipe?.strMealThumb || recipe?.strDrinkThumb || '';
-    this.category = recipe?.strCategory || '';
-    this.instructions = recipe?.strInstructions || '';
-    this.alcoholic = recipe?.strAlcoholic;
-    this.youtubeLink = recipe?.strYoutube || '';
-    this.tags = recipe?.strTags ? recipe.strTags.split(tagsSeparator) : [];
+  constructor(apiRecipe: APIRecipeType);
+  constructor(apiRecipe?: APIRecipeType) {
+    this.id = apiRecipe?.idMeal || apiRecipe?.idDrink || '';
+    this.name = apiRecipe?.strMeal || apiRecipe?.strDrink || '';
+    this.thumb = apiRecipe?.strMealThumb || apiRecipe?.strDrinkThumb || '';
+    this.category = apiRecipe?.strCategory || '';
+    this.instructions = apiRecipe?.strInstructions || '';
+    this.alcoholic = apiRecipe?.strAlcoholic;
+    this.youtubeLink = apiRecipe?.strYoutube || '';
+    this.tags = apiRecipe?.strTags ? apiRecipe.strTags.split(tagsSeparator) : [];
 
-    const getType = (r: APIObjectType): string => (r.idMeal ? MEALS_TYPE : DRINKS_TYPE);
-    this.recipeType = recipe ? getType(recipe) : '';
+    const getType = (r: APIRecipeType): string => (r.idMeal ? MEALS_TYPE : DRINKS_TYPE);
+    this.recipeType = apiRecipe ? getType(apiRecipe) : '';
 
-    const ingNames = extractList(recipe || {}, 'Ingredient');
-    const ingMeasures = extractList(recipe || {}, 'Measure');
+    const ingNames = extractList(apiRecipe || {}, 'Ingredient');
+    const ingMeasures = extractList(apiRecipe || {}, 'Measure');
     const ings: Ingrendient[] = [];
     ingNames.forEach((n, index) => ings.push({ name: n, measure: ingMeasures[index] }));
 

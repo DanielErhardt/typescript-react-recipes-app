@@ -1,16 +1,16 @@
 import Recipe from '../classes/Recipe';
 
-export type APIObjectType = {
+export type APIRecipeType = {
   [key: string]: string;
 };
 
-export type APIResponseType = {
-  [key: string]: APIObjectType[],
+export type APIDataType = {
+  [key: string]: APIRecipeType[],
 };
 
 export type RecipesContextType ={
   recipes: Recipe[];
-  updateRecipes: (apiResponse: APIResponseType) => void; // eslint-disable-line no-unused-vars
+  updateRecipes: (apiResponse: APIDataType) => void; // eslint-disable-line no-unused-vars
   resetRecipes: () => void;
   getRecipeType: (invert?: boolean) => string;
   categories: string[];

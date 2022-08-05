@@ -5,7 +5,7 @@ import {
   MEALS_TYPE, DRINKS_TYPE,
   fetchAllMealsAreas, fetchCategories, fetchIngredients,
 } from '../services/RecipesAPI';
-import { APIResponseType, RecipesContextType } from '../@types';
+import { APIDataType, RecipesContextType } from '../@types';
 import Recipe from '../classes/Recipe';
 
 type Props = {
@@ -26,7 +26,7 @@ function RecipesProvider({ children }: Props) {
     return pathname.includes('meals') ? MEALS_TYPE : DRINKS_TYPE;
   };
 
-  const updateRecipes = (apiResponse: APIResponseType): void => {
+  const updateRecipes = (apiResponse: APIDataType): void => {
     const responseType = apiResponse.meals ? MEALS_TYPE : DRINKS_TYPE;
     const newRecipes = apiResponse[responseType].map((apiRecipe) => new Recipe(apiRecipe));
     setRecipes(newRecipes || []);
