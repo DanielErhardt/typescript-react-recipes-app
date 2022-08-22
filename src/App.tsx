@@ -10,11 +10,12 @@ import ExploreByIngredients from './pages/ExploreByIngredients';
 import ExploreByNationalities from './pages/ExploreByNationalities';
 import UserRecipes from './pages/UserRecipes';
 import NotFound from './pages/NotFound';
-import './App.css';
+import GlobalStyles from './styles/Global';
 
 function App() {
   return (
     <BrowserRouter>
+      <GlobalStyles />
       <RecipesProvider>
         <Routes>
           <Route path="/" element={<LoginPage />} />
