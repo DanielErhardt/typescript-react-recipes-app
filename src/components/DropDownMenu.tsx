@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler } from 'react';
 import { createId } from '../helpers';
+import StyleWrapper from '../styles/components/DropDownMeny.styled';
 
 type Props = {
   label: string | undefined;
@@ -20,7 +21,7 @@ function DropDownMenu({
   );
 
   return (
-    <div className="drop-down-menu">
+    <StyleWrapper>
       {!labelToRight && labelElement}
       <select onChange={onChange}>
         {options.map((option) => (
@@ -28,7 +29,7 @@ function DropDownMenu({
         ))}
       </select>
       {labelToRight && labelElement}
-    </div>
+    </StyleWrapper>
   );
 }
 
