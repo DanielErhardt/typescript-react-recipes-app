@@ -6,6 +6,8 @@ import { fetchRecipeById, fetchAllRecipes } from '../services/RecipesAPI';
 import IngredientsList from '../components/IngredientsList';
 import RecipeCard from '../components/RecipeCard';
 import Recipe from '../classes/Recipe';
+import StyleWrapper from '../styles/pages/RecipePage.styled';
+import HorizontalScrollWrapper from '../styles/components/HorizontalScroll.styled';
 
 function RecipePage(): JSX.Element {
   const [finished, setFinished] = useState<boolean>(false);
@@ -41,44 +43,44 @@ function RecipePage(): JSX.Element {
   };
 
   return (
-    <main className="details-page">
-      <section className="details-page-section details-header">
-        <div className="section-background">
-          <img className="details-image" src={recipe.thumb} alt="Recipe Thumb" />
-          <div className="details-name-bar">
+    <StyleWrapper>
+      <section className="header">
+        <div>
+          <img src={recipe.thumb} alt="Recipe Thumb" />
+          <div className="recipe-name-bar">
             <h1>{recipe.name}</h1>
             {recipe.alcoholic ? <p>{`${recipe.category} (${recipe.alcoholic})`}</p> : <p>{recipe.category}</p>}
           </div>
         </div>
       </section>
-      <section className="details-page-section">
+      <section>
         <h3>Ingredients</h3>
-        <div className="section-background padded">
+        <div className="padded">
           <IngredientsList recipe={recipe} setFinished={setFinished} />
         </div>
       </section>
-      <section className="details-page-section">
+      <section>
         <h3>Instructions</h3>
-        <div className="section-background padded">
+        <div className="padded">
           <p>{recipe.instructions}</p>
         </div>
       </section>
       {!isInProgressPage && (
       <>
-        <section className="details-page-section">
+        <section>
           <h3>Video</h3>
           <ReactPlayer width="100%" height="100%" url={recipe.youtubeLink} />
         </section>
-        <section className="details-page-section">
+        <section>
           <h3>Recommended</h3>
-          <div className="horizontal-scroll">
+          <HorizontalScrollWrapper>
             {getRecommended().map((r) => (
               <RecipeCard
                 key={r.id}
                 recipe={r}
               />
             ))}
-          </div>
+          </HorizontalScrollWrapper>
         </section>
       </>
       )}
@@ -92,7 +94,7 @@ function RecipePage(): JSX.Element {
         { isInProgressPage && 'Finish Recipe'}
       </button>
       )}
-    </main>
+    </StyleWrapper>
   );
 }
 
