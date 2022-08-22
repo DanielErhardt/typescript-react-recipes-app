@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Recipe from '../classes/Recipe';
+import StyleWrapper from '../styles/components/IngredientsList.styled';
 
 type Props = {
   recipe: Recipe;
@@ -25,10 +26,9 @@ function IngredientsList({ recipe, setFinished } : Props) {
   const isIngredientChecked = (ingredient: string): boolean => checkedIngredients.includes(ingredient);
 
   return (
-    <ul style={{
-      marginLeft: isInProgressPage ? '0' : '15px',
-      listStyle: isInProgressPage ? 'none' : 'square',
-    }}
+    <StyleWrapper
+      marginLeft={isInProgressPage ? '0' : '15px'}
+      listStyle={isInProgressPage ? 'none' : 'square'}
     >
       {isInProgressPage ? (
         recipe.ingredients.map((ing, index) => (
@@ -58,7 +58,7 @@ function IngredientsList({ recipe, setFinished } : Props) {
           </li>
         ))
       )}
-    </ul>
+    </StyleWrapper>
   );
 }
 
