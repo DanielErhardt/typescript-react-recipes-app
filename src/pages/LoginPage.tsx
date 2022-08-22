@@ -6,6 +6,7 @@ import {
   saveMealsToken, saveCocktailsToken, saveUser,
 } from '../services/LocalStorageManager';
 import LabeledInput from '../components/LabeledInput';
+import StyleWrapper from '../styles/pages/LoginPage.styled';
 
 type State = {
   email: string;
@@ -48,10 +49,9 @@ function LoginPage(): JSX.Element {
   };
 
   return (
-    <main className="login-page">
+    <StyleWrapper>
       <h1>Login</h1>
       <LabeledInput
-        parentClassName="email-input"
         label={<At weight={ic.weight} size={ic.size} color={ic.color} />}
         name="email"
         type="email"
@@ -60,7 +60,6 @@ function LoginPage(): JSX.Element {
         onKeyDown={onEnterPressed}
       />
       <LabeledInput
-        parentClassName="password-input"
         label={<Password weight={ic.weight} size={ic.size} color={ic.color} />}
         name="password"
         type="password"
@@ -69,14 +68,13 @@ function LoginPage(): JSX.Element {
         onKeyDown={onEnterPressed}
       />
       <button
-        className="button-padded"
         type="button"
         disabled={!isLoginValid()}
         onClick={submitLogin}
       >
         Enter
       </button>
-    </main>
+    </StyleWrapper>
   );
 }
 
