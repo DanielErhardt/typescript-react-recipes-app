@@ -1,18 +1,18 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { createId } from '../helpers';
+import StyleWrapper from '../styles/components/LabeledInput.styled';
 
 const allowedTypes: (string | undefined)[] = ['number', 'text', 'email', 'password', 'search', 'checkbox', 'radio'];
 
 type Props = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   label: JSX.Element | string | undefined;
-  parentClassName?: string;
   labelToRight?: boolean;
 };
 
 function LabeledInput({
-  id, name, type, value, className, placeholder, defaultChecked,
+  id, name, type, value, placeholder, defaultChecked,
   onKeyDown, onChange,
-  label, labelToRight, parentClassName,
+  label, labelToRight,
 }: Props): JSX.Element {
   if (!allowedTypes.includes(type)) {
     throw new Error(`The InputElement component does not work currently with the ${type} type.`);
@@ -27,11 +27,9 @@ function LabeledInput({
   );
 
   return (
-    <div className={`labeled-input ${parentClassName}`}>
+    <StyleWrapper>
       {!labelToRight && labelElement}
       <input
-        style={{ margin: '0 3px' }}
-        className={className}
         id={thisId}
         type={type}
         name={name}
@@ -42,12 +40,11 @@ function LabeledInput({
         defaultChecked={defaultChecked}
       />
       {labelToRight && labelElement}
-    </div>
+    </StyleWrapper>
   );
 }
 
 LabeledInput.defaultProps = {
-  parentClassName: '',
   labelToRight: false,
 };
 

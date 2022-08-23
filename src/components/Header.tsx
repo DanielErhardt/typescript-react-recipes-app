@@ -11,6 +11,10 @@ import {
   fetchRecipesByIngredient, fetchRecipesByCategory,
 } from '../services/RecipesAPI';
 import { RecipesContextType } from '../@types';
+import {
+  Header as StyledHeader,
+  SearchButton, SearchBar,
+} from '../styles/components/Header.styled';
 
 const INGREDIENT_FILTER = 'Ingredient';
 const FIRST_LETTER_FILTER = 'First Letter';
@@ -73,35 +77,29 @@ function Header({ title, showSearchBar }: Props): JSX.Element {
     setSelectedFilter('');
   };
 
-  const searchButton = (
-    <button
-      className="search-button"
-      type="button"
-      onClick={search}
-    >
-      <MagnifyingGlass weight={ic.weight} color={ic.color} size={ic.size} />
-    </button>
-  );
-
   return (
-    <header>
-      <h1 className="header-title">{title}</h1>
+    <StyledHeader>
+      <h1>{title}</h1>
       {showSearchBar && (
         <>
-          <LabeledInput
-            parentClassName="input header-search-bar"
-            className="search-input"
-            type="search"
-            name="search"
-            value={searchValue}
-            onChange={onSearchChanged}
-            onKeyDown={onEnterPressed}
-            placeholder="Search Recipe"
-            label={searchButton}
-            labelToRight
-          />
+          <SearchBar>
+            <input
+              type="search"
+              name="search"
+              value={searchValue}
+              onChange={onSearchChanged}
+              onKeyDown={onEnterPressed}
+              placeholder="Search Recipe"
+            />
+            <SearchButton
+              type="button"
+              onClick={search}
+            >
+              <MagnifyingGlass weight={ic.weight} color={ic.color} size={ic.size} />
+            </SearchButton>
+          </SearchBar>
 
-          <div className="header-search-filters">
+          <div>
             {SEARCH_FILTERS.map((filter) => (
               <LabeledInput
                 key={`${filter} filter`}
@@ -123,7 +121,7 @@ function Header({ title, showSearchBar }: Props): JSX.Element {
         </>
       )}
       <SidewaysMenu options={categories} onOptionClick={onOptionClick} />
-    </header>
+    </StyledHeader>
   );
 }
 

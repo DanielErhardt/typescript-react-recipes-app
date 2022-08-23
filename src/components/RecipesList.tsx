@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import RecipeCard from './RecipeCard';
 import RecipesContext from '../context/RecipesContext';
 import { fetchAllRecipes } from '../services/RecipesAPI';
+import StyleWrapper from '../styles/components/RecipesList.styled';
 
 function RecipesList(): JSX.Element {
   const {
@@ -25,14 +26,14 @@ function RecipesList(): JSX.Element {
   }, [recipes]);
 
   return (
-    <div className="recipes-list">
+    <StyleWrapper>
       {recipes && recipes.map((recipe) => (
         <RecipeCard
           key={recipe.id}
           recipe={recipe}
         />
       ))}
-    </div>
+    </StyleWrapper>
   );
 }
 

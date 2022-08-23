@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from 'react';
+import StyleWrapper from '../styles/components/SidewaysMenu.styled';
 
 interface Props {
   options: string[],
@@ -7,7 +8,7 @@ interface Props {
 
 function SidewaysMenu({ options, onOptionClick }: Props): JSX.Element {
   return (
-    <nav className="sideways-menu">
+    <StyleWrapper>
       {options.map((o) => (
         <button
           key={`nav-option-${o}`}
@@ -18,7 +19,7 @@ function SidewaysMenu({ options, onOptionClick }: Props): JSX.Element {
           {o}
         </button>
       ))}
-    </nav>
+    </StyleWrapper>
   );
 }
 

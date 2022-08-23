@@ -1,5 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
+import StyleWrapper from '../styles/components/ModalWindow.styled';
 
 interface Props {
   message: string[],
@@ -10,18 +11,17 @@ const portal = document.getElementById('portal') as HTMLElement;
 
 function ModalWindow({ message, onClose }: Props) {
   return createPortal(
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
+    <StyleWrapper>
       {message.length > 0 && (
-      <div className="modal-background">
-        <div className="modal-window">
+      <div className="background">
+        <div className="foreground">
           <h4>{message}</h4>
           <br />
           <button type="button" onClick={onClose}>OK</button>
         </div>
       </div>
       )}
-    </>,
+    </StyleWrapper>,
     portal,
   );
 }
