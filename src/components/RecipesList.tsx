@@ -23,7 +23,7 @@ function RecipesList(): JSX.Element {
     };
 
     execute();
-  }, [recipes]);
+  }, []);
 
   return (
     <StyleWrapper>
