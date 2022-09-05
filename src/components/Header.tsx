@@ -68,13 +68,14 @@ function Header({ title, showSearchBar }: Props): JSX.Element {
     if (code === 'Enter' || code === 'NumpadEnter') { search(); }
   };
 
-  const clearFilter = () => {
+  const onClearButtonClick = () => {
     document.getElementsByName(HEADER_SEARCH_FILTER)
       .forEach((radio) => {
         const ref = radio as HTMLInputElement;
         ref.checked = false;
       });
     setSelectedFilter('');
+    setSearchValue('');
   };
 
   return (
@@ -113,7 +114,7 @@ function Header({ title, showSearchBar }: Props): JSX.Element {
 
             <button
               type="button"
-              onClick={clearFilter}
+              onClick={onClearButtonClick}
             >
               Clear
             </button>
