@@ -1,6 +1,6 @@
 import { APIRecipeType } from '../@types';
 import { loadRecipe, saveRecipe } from '../services/LocalStorageManager';
-import { MEALS_TYPE, DRINKS_TYPE } from '../services/RecipesAPI';
+import { getRecipeType } from '../helpers';
 import type { Ingredient } from '../@types';
 
 // eslint-disable-next-line max-len
@@ -40,8 +40,7 @@ export default class Recipe {
     this.youtubeLink = apiRecipe?.strYoutube || '';
     this.tags = apiRecipe?.strTags ? apiRecipe.strTags.split(tagsSeparator) : [];
 
-    const getType = (r: APIRecipeType): string => (r.idMeal ? MEALS_TYPE : DRINKS_TYPE);
-    this.recipeType = apiRecipe ? getType(apiRecipe) : '';
+    this.recipeType = apiRecipe ? getRecipeType(apiRecipe) : '';
 
     const ingNames = extractList(apiRecipe || {}, 'Ingredient');
     const ingMeasures = extractList(apiRecipe || {}, 'Measure');
