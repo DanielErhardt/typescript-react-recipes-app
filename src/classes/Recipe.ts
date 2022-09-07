@@ -3,10 +3,6 @@ import { loadRecipe, saveRecipe } from '../services/LocalStorageManager';
 import { getRecipeType } from '../helpers';
 import type { Ingredient } from '../@types';
 
-// eslint-disable-next-line max-len
-// Regex taken from https://stackoverflow.com/questions/650022/how-do-i-split-a-string-with-multiple-separators-in-javascript
-const tagsSeparator = /(?:,| )+/;
-
 const extractList = (recipe: APIRecipeType, keyName:string): string[] => (
   Object.entries(recipe)
     .filter((e) => e[0].includes(keyName))
@@ -38,7 +34,7 @@ export default class Recipe {
     this.instructions = apiRecipe?.strInstructions || '';
     this.alcoholic = apiRecipe?.strAlcoholic;
     this.youtubeLink = apiRecipe?.strYoutube || '';
-    this.tags = apiRecipe?.strTags ? apiRecipe.strTags.split(tagsSeparator) : [];
+    this.tags = apiRecipe?.strTags ? apiRecipe.strTags.split(/(?:,| )+/) : [];
 
     this.recipeType = apiRecipe ? getRecipeType(apiRecipe) : '';
 
